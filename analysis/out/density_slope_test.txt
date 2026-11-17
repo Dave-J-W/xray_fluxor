@@ -1,0 +1,60 @@
+DENSITY-SLOPE TEST of the live N2-density correction -- MonP (15IDC:scaler1.S3) against the DBPM sum
+Run 2026-11-17 15:05Z, data tag 2026-11-12_2026-11-17.  READ-ONLY (archiver GET + IEM ASOS GET).
+Window: 2026-11-12 18:42Z .. 2026-11-17 15:01Z; S3 rows 83712.
+
+DATA CHECKS
+  MonP count period 15IDC:scaler1.TP1 = 1 s (S3 is sampled every 5 s); S3 rate = S3/TP1.
+  MonP sensitivity: 15IDC:A2sens_num index 8 -> 500 ; sens_unit has NO archived event (assumed nA/V per memory/CHAMBER_FACTS);
+    sens_num, sens_unit and 15ID:FX4_1:Range_RBV each have <=1 archived event in the window: no gain change, so no split is needed.
+    The sensitivity only scales I_P; it cancels in a log-log slope.
+  Dark (ring current < 1 mA, 7362 rows, median): 194.0 Hz at the same gain (task: 182-227 Hz).
+  Mono energy 15 keV cut: rows with E < 15 keV: 0 of 83712.  E range 30.0008..30.0017 keV.
+  -> ALL archived data are at 30.001 keV.  The task's 'E < 15 keV' restriction leaves nothing, so the test is run at 30 keV,
+     where the wall loss (which also depends on density) is part of the expected slope.  See EXPECTED SLOPE.
+  15IDGen:0:userTran6.E is archived with severity INVALID (3) on every row; its values track the FX4 SumAll sum, so both are run,
+     the alarm-free 15ID:FX4_1:SumAll:MeanValue_RBV is the headline.
+
+EXPECTED SLOPE d ln(I_P/DBPM)/d ln(rho)  (calc/PRESSURE.md section 3, MonP, 30 keV)
+  absorption only 1.00; with the wall loss: 1.93 (live fit, E_eff scaling) or 1.83 (Monte Carlo at +-3 % density).
+  A slope near 1.0 would say the wall-loss density dependence is NOT there; ~1.8-1.9 confirms the live density correction as built.
+
+SELECTION
+  beam on (ring > 100 mA, no top-up glitch |I - 9-pt median| < 0.5 mA) & S3 > 1e4 Hz & E const within 1 eV: 52391 rows (72.8 h)
+  cut B (all four DBPM quadrant fractions within 3 MAD of their beam-on median = 'aligned'): 48617 rows
+  Gross glitches: rows where ln(I_P/DBPM) is > 5 robust sigma from its own 5-minute running median are dropped (deglitch());
+  this tracks slow drift and the density trend, so it does not select on the slope; applied to every variant below.
+  'Aligned' cannot be read directly; B means the beam sits where it usually does on the DBPM.  I deliberately do NOT cut on
+  the response ratio I_P/DBPM itself (selecting on the dependent variable biases the slope).
+
+RESULTS: slope b of ln(I_P / DBPM) on ln(rho)   [dimensionless]; SE and 95 % interval from a bootstrap of whole hours (2000 draws)
+  DBPM source          cut  intercepts  N rows  hours   b      SE(b)   95 % interval
+  FX4 SumAll (valid)    A   single      51813     89    2.22    0.09  [ 2.02,  2.39]
+  FX4 SumAll (valid)    A   daily       51813     89    3.31    0.77  [ 1.81,  4.84]
+  FX4 SumAll (valid)    B   single      48516     86    2.35    0.06  [ 2.23,  2.48]
+  FX4 SumAll (valid)    B   daily       48516     86    2.14    0.58  [ 1.12,  3.32]  <== headline
+  userTran6.E (INVALID)  A   single      38126     69    2.49    0.12  [ 2.23,  2.68]
+  userTran6.E (INVALID)  A   daily       38126     69    4.02    0.89  [ 2.37,  5.88]
+  userTran6.E (INVALID)  B   single      35384     66    2.64    0.06  [ 2.52,  2.75]
+  userTran6.E (INVALID)  B   daily       35384     66    2.84    0.65  [ 1.68,  4.16]
+
+COVERAGE (headline selection: dbpm2, cut B, daily intercepts; 48516 rows)
+  rho: 1.1254 .. 1.1484 mg/cm3, full range 2.04 %, 2.5-97.5 % range 1.84 %
+  P (ASOS-derived, 228 m): 98.644 .. 100.665 kPa, range 2.05 %   (299 IEM observations over the window, linearly interpolated)
+  T (15ID:Sensor2:Temperature): 21.99 .. 22.94 degC, range 0.32 % of absolute T (60 s SCAN, linearly interpolated)
+    day 2026-11-12:   3023 rows, rho range within the day 0.15 %
+    day 2026-11-13:  15478 rows, rho range within the day 0.42 %
+    day 2026-11-14:  11793 rows, rho range within the day 0.68 %
+    day 2026-11-15:  10856 rows, rho range within the day 0.48 %
+    day 2026-11-16:   7366 rows, rho range within the day 0.45 %
+  residual scatter of ln(I_P/DBPM) about the fit: 0.472 % (1 sigma, 5 s points); counting statistics alone ~0.361 %
+  std of ln(I_P/DBPM) within segments (before the fit): 0.522 %
+
+SEPARATE P AND T SLOPES (same selection; slopes on ln P and on -ln T; both should equal b if Sensor2 is the chamber gas)
+  ln P alone      :   1.75  SE 0.54  95 % [0.84, 2.89]
+  -ln T alone     :   4.23  SE 1.85  95 % [1.12, 8.22]   (T moved only 0.32 %)
+  joint (lnP, -lnT):   2.01 /   5.35  SE 0.50 / 1.57
+  ln rho alone    :   2.14  SE 0.58  95 % [1.12, 3.32]
+
+VERDICT (mechanical; the interpretation is in PROGRESS.md)
+  spread of b over the 8 variants above (DBPM source x cut x intercepts): 2.14 .. 4.02  (= 1.88; headline SE 0.58)
+  b = 2.14 +- 0.58 (95 % [1.12, 3.32])  vs expected 1.93/1.83 (wall loss) and 1.00 (absorption only): NOT ROBUST: b moves by more than 2 SE with the analysis choice, so the bootstrap SE understates the systematic error; read as 'positive, between about 1 and 3', not as a measurement; the headline interval excludes the absorption-only slope 1.00

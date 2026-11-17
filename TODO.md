@@ -1,0 +1,60 @@
+# TODO: deferred items, each needing its own scoping
+
+Each item here was set aside by the user on 2026-11-12 unless noted otherwise.
+
+- [ ] **Dark-count drift.** Dark counts have been seen changing over time. Give it a separate round of scrutiny and research: the sources (SR570 offset drift, HV leakage, V2F zero, temperature), the timescales, and how often to re-measure the dark.
+  - Lead (2026-11-12): the SR570 offset temperature coefficient is 2–20 pA/°C, ≈0.4–4 Hz/°C at 500 nA/V (Low Drift column, manual Table 1). The input offset current is fixed in amps, so the dark in Hz scales with 1/S. **Corrected by measurement (Experimenter, 6d95ee3):** on MonC the offset-off dark is output-referred, depends on the range with both signs, and drifts tens of Hz in the first hour after power-on. It does NOT scale as 1/S.
+  - In progress (2026-11-12, in scope by plan change): MonC sweeps (`data/sweeps/monc_sweep1_results.md`).
+    - The dark with the offset off is range-dependent (55–475 Hz across 1–500 nA/V), so it is **not** a single current scaling as 1/S. Measure it per range.
+    - UNCAL offsets clip on one sign (the V2F is unipolar). The MonC baseline sits ~15 Hz above the clip.
+    - EPICS SR570 values aren't a hardware record: the unit was off for sweep 1. A 1 Hz logger is running (`tools/OPERATOR.md`).
+- [ ] **MonP/BPM running ratio** as a gross-malfunction monitor for either subsystem. First define what counts as an error state.
+  - DBPM sum PV: `15IDGen:0:userTran6.E` (user, 2026-11-13). Archived from 2026-11-13 (SCAN 5 s).
+  - The ratio is meaningful only with the beam aligned: MonP is more robust to misalignment than the DBPM (user).
+  - Note: MonP efficiency follows barometric pressure (median 0.4 %/day, up to 3 %/day; `analysis/out/pressure_climatology.txt`) and the BPM does not. Thresholds must allow for that, or correct for it.
+- [x] **Photoelectron wall loss above ~14 keV:** Monte Carlo done 2026-11-12 (`analysis/wall_loss_mc.py`, validated against Grün). The signal loss is 46 % at 30 keV (50 % per photoabsorption; the photoelectric-share fix of 2026-11-13) and is now corrected live in the best estimate (userTran3.L / userTran6.L). Remaining:
+  - a measured check at a second anchor energy (25–30 keV);
+  - plate material/backscatter;
+  - the confirmed gap.
+- [x] **Fringe-field l_eff:** superseded 2026-11-13. The chamber is guarded and measured. l_eff = 61.925 mm comes from the 2-D model of the measured geometry, and the live bounds are symmetric (CHAMBER_FACTS F4.1–F4.4). The unguarded scan (`analysis/fringe_field.py`) is kept as history.
+- [ ] **N101VTF input impedance** (SR570 50 Ω output loading). Procedure ready: Experimenter `procedures/v2f_input_impedance.md` (monc-dark 4e556b0). **Deferred by the user, 2026-11-12 ("Not now").** Needs the user in the hutch plus approval for the MonC SR570 writes.
+- [ ] **If the V2F moves to 0–5 V:** recalibrate, and carry Hz/V as configuration (2e5 instead of 1e5).
+- [x] **Retroactive pressure correction from ASOS:** inter-station agreement checked (LOT vs JOT/ARR/MDW/ORD, 2025): 0.05 % 1σ, 95th percentile ≤0.1 % (`analysis/out/asos_intercompare.txt`). Still to do: implement it (see the ASOS + Sensor2 item).
+- [ ] **xraydb two-carrier report:** the evidence is in `references/xraydb_two_carrier/CASE.md`. Still to add: Knoll and ICRU 85 page quotes, and the C-station anchor. Whether to report is the user's decision.
+- [ ] **MonC and other chambers.** MonC is the same design as MonP, mounted with its plates horizontal (CHAMBER_FACTS F1.3), and its electronics are measured (`ELECTRONICS_CONCLUSIONS.md`). Still open: MonC's reference plane, and using its per-gain calibration in the live calc (`calc/monc_gain_cal.py` is a draft). MonC's gain changes often, with the focusing and the S1 configuration.
+  - **MonC background requirements** (Experimenter, 2026-11-12):
+    - Tag each background estimate by gain **and** offset state (on/off, CAL/UNCAL, level, sign).
+    - The no-beam total includes the CAL offset, +1e5·I_off/S Hz. With the interim +2 nA it is ≈315 Hz at 1 µA/V, 190 at 2, 59 at 5, 33 at 10 and 610 at 20 µA/V. So "<120 Hz" holds only at 5 and 10 µA/V.
+    - Sanity-check each dark against the expected band for its tagged gain, and flag it when outside. EPICS shows only the last values sent, and a power cycle reverts the unit until A3init is run. (The "630 Hz anomaly" first cited here was withdrawn by Experimenter: it was the 20 µA/V dark after an unwritten gain step, not a hidden state.)
+    - The V2F zero-input rate on MonC's channel is 8.4 Hz (SR570 off, 47 min). Every quoted MonC dark includes it, and with the chamber cabled also the +21.5 Hz connection offset (CHAMBER_FACTS F8.1, F6.2).
+    - Expect tens of Hz of drift in the first hour after power-on on some ranges (200 nA/V, 20 µA/V). 5 and 10 µA/V hold ±1.5 Hz over 15 min.
+    - Source: Experimenter, branch monc-dark, `data/sweeps/monc_sweep1_results.md`, sets 4-5.
+- [ ] **Kapton windows and the air path after MonC.** The air path (to the detector, with the sample removed) is measurable to ~2 mm.
+- [x] **Counter manual.** Added by the user as `references/vsc16man-A.pdf` (Joerger VSC16), 2026-11-12. It confirms 40 MHz, TTL into 50 Ω, a 10 MHz ±0.01 % crystal and 32-bit capacity. Remaining (minor): which clock drives the EPICS time channel.
+- [x] **SR570 manual.** Added to `references/` (2026-11-12). Output ±5 V, gain accuracy, listen-only RS-232 and offset range are now SOURCE in the note.
+- [x] **CMC-custom ion chamber geometry:** delivered by the user on 2026-11-13 (MonC in hand; MonP is the same design). It is defined in `analysis/cmc_chamber_geometry.py` and listed in `CHAMBER_FACTS.md`.
+- [ ] **Exhaust arrangement on MonP/MonC** (open outlet vs bubbler). It decides whether ASOS ambient pressure applies directly. A one-time differential-gauge reading settles it.
+- [ ] **Normalization proposal** (`normalization_proposal.md`): the user decides. Tests from archiver history: MonP/DBPM vs pressure (slope +1), jumps in r at SR570 gain changes, stability of r, MonP-MonC coherence. Coordinate with Experimenter's archiver pulls.
+- [x] **ASOS + Sensor2 density correction:** live 2026-11-12 (`tools/asos_pressure.py`, cron by the user; `calc/PRESSURE.md`).
+- [x] **Wall-loss correction at the live density:** done 2026-11-12 (E_eff in the bounds slots). Was: the fit is at the site mean. Use E_eff = E·(ρ₀/ρ)^0.568 in the bounds slot's C. The unapplied term is −1.0 %/% of pressure at 30 keV, ±0.8 % (1σ) from the weather (`calc/PRESSURE.md` §3).
+- [x] **Hutch elevation vs LOT:** the user gave 228 m for the chambers (2026-11-12). Applied in tools/asos_pressure.py (−0.27 % vs LOT).
+- [ ] **MonP specifics.** MonP is the same guarded design as MonC (CHAMBER_FACTS §1). Still open: MonP's beam position in its gap (F2.5, ASSUMED centred), l_gap (the N2 path from the plate end to the exit window; 0 used) and the HV at the chamber (F3.1).
+- [x] **Hutch P and T PVs.** Temperature: `15ID:Sensor2:Temperature` (the user); history analysed (`analysis/out/hutch_temperature.txt`). No pressure PV, so ASOS is used.
+- [ ] **W(N2) primary sources.** The ICRU 31 table with its uncertainty; Combecher (1980).
+- [ ] **Pixel-detector absolute anchor.** Write the procedure once the air/window step exists.
+- [x] **Software, first piece:** the live MonP flux on 15IDC:util:userTran1 (2026-11-12; `calc/`).
+- [ ] **utilioc follow-ups** (calc/HANDOFF.md, open items):
+  - ~~auto dark capture~~ done as the rate-gated background (userTran2), 2026-11-12;
+  - a live pressure source (ASOS soft IOC or a gauge);
+  - ~~a validity flag~~ done as the status slot with severities (userCalcOut1), 2026-11-12;
+  - MS vs NMS links;
+  - a MonC slot.
+- [x] **Tell the utilioc OPERATOR/HANDOFF:** done via the screens procedure. All five slots are in cmc-services README/HANDOFF and on the screens (b0c63c2, shipped 2026-11-12).
+- [ ] **E-station chamber: a local temperature (and pressure) reading** (user, 2026-11-14: "keep a local temperature reading on the to-dos"). No pressure or temperature sensor exists for the IC-500-50's flowing N2; `analysis/estation_step6.py` uses stand-ins (98.99 kPa, 22.2 °C hutch air). Needs a sensor at the chamber (a thermocouple on the body, and the gas supply pressure), a PV for it, and archiving; until then the flux carries the density assumption (`fluxor/ASSUMPTIONS.md` A7, A23).
+- [ ] **E-station lane: rate-gated dark estimator slot** (utilioc transform 12 is reserved). Until then the dark is the hand-set value in `userTran9.F` (default 0 nA).
+- [ ] **E-station lane: beam size and aspect.** When the user supplies the beam's real height and width, update the three registry rows (`beam.width_mm`, `beam.aspect_low/central/high`), rerun `calc/estation_lane.py` and reinstall the lane.
+- [ ] **E-station lane: bounds widened by the absolute noise at low current**, as `fluxor.core.evaluate` does below about 4 nA, if ever wanted (today bit 8 flags the region below 50 nA instead).
+- [ ] **E-station lane: verify with BEAM on** (the lane was checked on live dark inputs on 2026-11-16: formula within 0.6 % of `fluxor`; RESULT/bounds not yet seen at a real current). Original item: verify on live TetrAMM currents once the TetrAMM IOC is back (offline since 2026-11-16 08:41 CST; restart is a beamline task). Run `calc/install_lane.py --lane EStn --compare`, then compare the live RESULT (userTran10.L) with `fluxor` on the live inputs (within 2 %), and check the TetrAMM links read back and the flux slot SEVR is not INVALID. Also confirm from this PC and from the utilioc host that the TetrAMM PVs are reachable by the utilioc's CA settings.
+- [ ] **E-station lane: detect a FROZEN input** (found 2026-11-17). **Scoped 2026-11-17, build deferred by the user ("Spec only, build later"): `docs/superpowers/specs/2026-11-17-estation-freeze-detector-design.md`** (flags slot only, letters M-P, folded into bit 32, 10 identical scans; needs the guarded reinstall and a live test while the TetrAMM is frozen). The TetrAMM IOC stayed connected and reported Acquiring but stopped updating (channel 3 constant at 0.6972573897461134 nA over many seconds, all its PVs with one last-update timestamp); the lane kept publishing a flat RESULT, status MINOR as for any no-beam state, no alarm and no INVALID. Propose: a state letter holding the previous A+B and a counter of consecutive identical scans (an exactly equal double is a strong sign of a frozen source; real dark noise is never exactly equal), folded into flag bit 32 (raw current fault) or a new bit so the status goes MAJOR after, say, 10 identical scans. The MonP and MonC count inputs do not need it (the scaler counts integers). This changes the installed slots, so it needs the user's approval, a reinstall by the procedure in `calc/OPERATOR.md`, and a plan-change row.
+- [ ] **Phoebus retrieval of archived data (long-term, user 2026-11-17).** Locate the site's Data Browser archive URL setting (unverified candidate: a pbraw URL on the archiver host, port 17668, path /retrieval); then build the Trends tab and sparklines of the flux dashboard (spec `docs/superpowers/specs/2026-11-17-flux-dashboard-design.md`). The 29 lane PVs are archived since 2026-11-17 (calcouts without `.VAL`).
+- [ ] **Energy readback error** (added 2026-11-17). The absolute budget carries 0.4 % on an ASSUMED 0.1 % energy error (CHAMBER_FACTS F9.7, fluxor row `terms.energy_readback_rel`). Measure it with an edge scan (a foil K edge) at the working energy, at C-station (DCM) and E-station (side-bounce mono). Above ~0.15 % the C-station bound factors change and the lanes need a reinstall.

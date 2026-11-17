@@ -1,0 +1,3 @@
+# keep downloaded references byte-for-byte (no CRLF conversion)
+data/queries/** -text
+references/** -text

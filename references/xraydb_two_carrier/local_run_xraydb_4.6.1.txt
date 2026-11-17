@@ -1,0 +1,4 @@
+﻿test ic2, both_carriers=True: incident=3.78446e+11 (test expects 3.75e11; 2021 test expected 7.5417e11)
+test ic2, both_carriers=False: incident=7.56893e+11 (test expects 3.75e11; 2021 test expected 7.5417e11)
+docstring example, both_carriers=True: In=1.60694e+11 Out=1.45842e+11 (docstring states In=3.20045e+11)
+docstring example, both_carriers=False: In=3.21388e+11 Out=2.91684e+11 (docstring states In=3.20045e+11)

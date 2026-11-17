@@ -1,0 +1,4 @@
+fefbc39542399883009a93ecec68b1d85568ffa4
+Matthew Newville 2023-04-03T17:26:21Z
+ionchamber_flux adds option to set ncarriers to 1, but defaults to 2 (count electron and ion), cleanup
+https://github.com/xraypy/XrayDB/commit/fefbc39542399883009a93ecec68b1d85568ffa4

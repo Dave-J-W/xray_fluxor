@@ -1,0 +1,57 @@
+step,block,writes,dwell_s,expected_Hz,question
+S0,start,blank_on=OFF;offset_on=OFF;offset_cal=CAL;offset_sign=+;sens_unit=uA/V;sens_num=5,14,dark at 5 uA/V,full state write first (lesson F8)
+p1_200n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=200,12,dark,
+p1_500n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=500,12,dark,
+p1_1u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=1,12,dark,
+p1_2u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=2,12,dark,
+p1_5u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5,12,dark,
+p1_10u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=10,12,dark,
+p1_20u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=20,12,dark,
+p1_5u_d,pass_dark,sens_unit=uA/V;sens_num=5,12,dark,5 uA/V again
+p1_5u_b,pass_blank,blank_on=ON,12,,
+p1_5u_ub,pass_dark,blank_on=OFF,12,dark,
+p1_hold,interim_hold,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5;offset_cal=CAL;offset_unit=nA;offset_num=2;offset_sign=+;offset_on=ON,60,~59,interim setting
+p2_200n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=200,12,dark,
+p2_500n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=500,12,dark,
+p2_1u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=1,12,dark,
+p2_2u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=2,12,dark,
+p2_5u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5,12,dark,
+p2_10u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=10,12,dark,
+p2_20u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=20,12,dark,
+p2_5u_d,pass_dark,sens_unit=uA/V;sens_num=5,12,dark,5 uA/V again
+p2_5u_b,pass_blank,blank_on=ON,12,,
+p2_5u_ub,pass_dark,blank_on=OFF,12,dark,
+p2_hold,interim_hold,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5;offset_cal=CAL;offset_unit=nA;offset_num=2;offset_sign=+;offset_on=ON,60,~59,interim setting
+p3_200n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=200,12,dark,
+p3_500n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=500,12,dark,
+p3_1u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=1,12,dark,
+p3_2u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=2,12,dark,
+p3_5u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5,12,dark,
+p3_10u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=10,12,dark,
+p3_20u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=20,12,dark,
+p3_5u_d,pass_dark,sens_unit=uA/V;sens_num=5,12,dark,5 uA/V again
+p3_5u_b,pass_blank,blank_on=ON,12,,
+p3_5u_ub,pass_dark,blank_on=OFF,12,dark,
+p3_hold,interim_hold,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5;offset_cal=CAL;offset_unit=nA;offset_num=2;offset_sign=+;offset_on=ON,60,~59,interim setting
+p4_200n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=200,12,dark,
+p4_500n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=500,12,dark,
+p4_1u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=1,12,dark,
+p4_2u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=2,12,dark,
+p4_5u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5,12,dark,
+p4_10u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=10,12,dark,
+p4_20u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=20,12,dark,
+p4_5u_d,pass_dark,sens_unit=uA/V;sens_num=5,12,dark,5 uA/V again
+p4_5u_b,pass_blank,blank_on=ON,12,,
+p4_5u_ub,pass_dark,blank_on=OFF,12,dark,
+p4_hold,interim_hold,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5;offset_cal=CAL;offset_unit=nA;offset_num=2;offset_sign=+;offset_on=ON,60,~59,interim setting
+p5_200n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=200,12,dark,
+p5_500n_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=nA/V;sens_num=500,12,dark,
+p5_1u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=1,12,dark,
+p5_2u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=2,12,dark,
+p5_5u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5,12,dark,
+p5_10u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=10,12,dark,
+p5_20u_d,pass_dark,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=20,12,dark,
+p5_5u_d,pass_dark,sens_unit=uA/V;sens_num=5,12,dark,5 uA/V again
+p5_5u_b,pass_blank,blank_on=ON,12,,
+p5_5u_ub,pass_dark,blank_on=OFF,12,dark,
+p5_hold,interim_hold,blank_on=OFF;offset_on=OFF;sens_unit=uA/V;sens_num=5;offset_cal=CAL;offset_unit=nA;offset_num=2;offset_sign=+;offset_on=ON,60,~59,interim setting

@@ -1,0 +1,17 @@
+# guarded CMC-custom chamber, 2-D Laplace + field lines, grid 0.05 mm; delta = l_eff / 61.90 mm - 1 (calc L_CM); flux factor 1/(1+delta)
+# geometry: analysis/cmc_chamber_geometry.py (user's MonC measurements, 2026-11-13)
+case,l_eff_mm,edge_up_mm,edge_down_mm,delta_pct,flux_deficit_pct,what
+nominal,61.925,-30.955,30.945,0.040,0.040,as measured (cmc_chamber_geometry)
+guard_gap_0.5,61.675,-30.830,30.820,-0.363,-0.365,collector-to-guard gap 0.5 mm
+guard_gap_1.5,62.275,-31.130,31.120,0.606,0.602,collector-to-guard gap 1.5 mm
+guard_touches_wall,61.925,-30.955,30.945,0.040,0.040,no gap between guard and end wall
+guard_recess_0.25,61.525,-30.755,30.745,-0.606,-0.610,guard set back 0.25 mm (measured 0.51)
+guard_recess_0.75,62.375,-31.180,31.170,0.767,0.762,guard set back 0.75 mm (measured 0.51)
+guard_flush,61.075,-30.530,30.520,-1.333,-1.351,guard level with the collector face (no recess)
+coll_len_-0.5,61.475,-30.730,30.720,-0.687,-0.691,collector 0.5 mm shorter
+coll_len_+0.5,62.425,-31.205,31.195,0.848,0.841,collector 0.5 mm longer
+beam_z_+1,62.075,-31.030,31.020,0.283,0.282,beam 1 mm toward the collector
+beam_z_-1,61.775,-30.880,30.870,-0.202,-0.202,beam 1 mm toward the HV plate
+hv_len_-2,61.825,-30.905,30.895,-0.121,-0.121,HV plate 2 mm shorter
+gap_+0.2,61.925,-30.955,30.945,0.040,0.040,plate gap 0.2 mm wider (HV plate moved)
+gap_-0.2,61.975,-30.980,30.970,0.121,0.121,plate gap 0.2 mm narrower (HV plate moved)

@@ -1,0 +1,69 @@
+step,block,writes,dwell_s,expected_Hz,question
+F0,baseline,sens_num=50;offset_cal=UNCAL;offset_unit=nA;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,15,~15,baseline repeat (start)
+A0,cal_lin,offset_on=OFF;sens_num=50,7,~55 (dark),offset-off dark before
+A1nA,cal_lin,offset_cal=CAL;offset_sign=+;offset_unit=nA;offset_num=1;offset_on=ON,7,2000 + dark,CAL offset linear in level? (and V2F to 100 kHz)
+A2nA,cal_lin,offset_num=2,7,4000 + dark,CAL offset linear in level? (and V2F to 100 kHz)
+A5nA,cal_lin,offset_num=5,7,10000 + dark,CAL offset linear in level? (and V2F to 100 kHz)
+A10nA,cal_lin,offset_num=10,7,20000 + dark,CAL offset linear in level? (and V2F to 100 kHz)
+A20nA,cal_lin,offset_num=20,7,40000 + dark,CAL offset linear in level? (and V2F to 100 kHz)
+A50nA,cal_lin,offset_num=50,7,100000 + dark,CAL offset linear in level? (and V2F to 100 kHz)
+A9,cal_lin,offset_on=OFF,7,~55 (dark),offset-off dark after
+B1d,gain2pt,offset_on=OFF;sens_num=1,7,dark (may clip),offset-off dark at this range
+B1l,gain2pt,offset_unit=pA;offset_num=200;offset_on=ON,7,20000 + dark,"two-point line: slope = gain x offset cal, intercept = dark"
+B1h,gain2pt,offset_num=1;offset_unit=nA,7,100000 + dark,
+B2d,gain2pt,offset_on=OFF;sens_num=2,7,dark (may clip),offset-off dark at this range
+B2l,gain2pt,offset_unit=pA;offset_num=500;offset_on=ON,7,25000 + dark,"two-point line: slope = gain x offset cal, intercept = dark"
+B2h,gain2pt,offset_num=2;offset_unit=nA,7,100000 + dark,
+B5d,gain2pt,offset_on=OFF;sens_num=5,7,dark (may clip),offset-off dark at this range
+B5l,gain2pt,offset_unit=nA;offset_num=1;offset_on=ON,7,20000 + dark,"two-point line: slope = gain x offset cal, intercept = dark"
+B5h,gain2pt,offset_num=5,7,100000 + dark,
+B10d,gain2pt,offset_on=OFF;sens_num=10,7,dark (may clip),offset-off dark at this range
+B10l,gain2pt,offset_unit=nA;offset_num=2;offset_on=ON,7,20000 + dark,"two-point line: slope = gain x offset cal, intercept = dark"
+B10h,gain2pt,offset_num=10,7,100000 + dark,
+B20d,gain2pt,offset_on=OFF;sens_num=20,7,dark (may clip),offset-off dark at this range
+B20l,gain2pt,offset_unit=nA;offset_num=5;offset_on=ON,7,25000 + dark,"two-point line: slope = gain x offset cal, intercept = dark"
+B20h,gain2pt,offset_num=20,7,100000 + dark,
+B50d,gain2pt,offset_on=OFF;sens_num=50,7,dark (may clip),offset-off dark at this range
+B50l,gain2pt,offset_unit=nA;offset_num=10;offset_on=ON,7,20000 + dark,"two-point line: slope = gain x offset cal, intercept = dark"
+B50h,gain2pt,offset_num=50,7,100000 + dark,
+B100d,gain2pt,offset_on=OFF;sens_num=100,7,dark (may clip),offset-off dark at this range
+B100l,gain2pt,offset_unit=nA;offset_num=20;offset_on=ON,7,20000 + dark,"two-point line: slope = gain x offset cal, intercept = dark"
+B100h,gain2pt,offset_num=100,7,100000 + dark,
+B200d,gain2pt,offset_on=OFF;sens_num=200,7,dark (may clip),offset-off dark at this range
+B200l,gain2pt,offset_unit=nA;offset_num=50;offset_on=ON,7,25000 + dark,"two-point line: slope = gain x offset cal, intercept = dark"
+B200h,gain2pt,offset_num=200,7,100000 + dark,
+B500d,gain2pt,offset_on=OFF;sens_num=500,7,dark (may clip),offset-off dark at this range
+B500l,gain2pt,offset_unit=nA;offset_num=100;offset_on=ON,7,20000 + dark,"two-point line: slope = gain x offset cal, intercept = dark"
+B500h,gain2pt,offset_num=500,7,100000 + dark,
+F1,baseline,sens_num=50;offset_cal=UNCAL;offset_unit=nA;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,15,~15,baseline repeat (middle)
+C-10,vernier_tf,off_u_put=-10,7,0 (clip <~+6),"knee near the clip, linearity to full scale"
+C-4,vernier_tf,off_u_put=-4,7,0 (clip <~+6),
+C0,vernier_tf,off_u_put=0,7,0 (clip <~+6),
+C2,vernier_tf,off_u_put=2,7,0 (clip <~+6),
+C4,vernier_tf,off_u_put=4,7,0 (clip <~+6),
+C6,vernier_tf,off_u_put=6,7,0 (clip <~+6),
+C8,vernier_tf,off_u_put=8,7,79 (clip <~+6),
+C10,vernier_tf,off_u_put=10,7,160 (clip <~+6),
+C15,vernier_tf,off_u_put=15,7,362 (clip <~+6),
+C20,vernier_tf,off_u_put=20,7,565 (clip <~+6),
+C30,vernier_tf,off_u_put=30,7,970 (clip <~+6),
+C50,vernier_tf,off_u_put=50,7,1780 (clip <~+6),
+C100,vernier_tf,off_u_put=100,7,3805 (clip <~+6),
+C200,vernier_tf,off_u_put=200,7,7855 (clip <~+6),
+C500,vernier_tf,off_u_put=500,7,20005 (clip <~+6),
+C1000,vernier_tf,off_u_put=1000,7,40255 (clip <~+6),
+D50_2nA,uncal_group,off_u_put=50;offset_num=2,7,?,vernier full scale per level range group
+D50_20nA,uncal_group,off_u_put=50;offset_num=20,7,?,vernier full scale per level range group
+D50_200nA,uncal_group,off_u_put=50;offset_num=200,7,?,vernier full scale per level range group
+D50_100nA,uncal_group,off_u_put=50;offset_num=100,7,?,vernier full scale per level range group
+D50_500nA,uncal_group,off_u_put=50;offset_num=500,7,?,vernier full scale per level range group
+D100_2nA,uncal_group,off_u_put=100;offset_num=2,7,?,vernier full scale per level range group
+D100_20nA,uncal_group,off_u_put=100;offset_num=20,7,?,vernier full scale per level range group
+D100_200nA,uncal_group,off_u_put=100;offset_num=200,7,?,vernier full scale per level range group
+E0,uncal_sign,offset_num=20;off_u_put=100,7,~3800,
+E1-,uncal_sign,offset_sign=-;off_u_put=100,7,~3800,sign effect in UNCAL
+E2+,uncal_sign,offset_sign=+;off_u_put=100,7,~3800,sign effect in UNCAL
+E3-,uncal_sign,offset_sign=-;off_u_put=100,7,~3800,sign effect in UNCAL
+E4+,uncal_sign,offset_sign=+;off_u_put=100,7,~3800,sign effect in UNCAL
+F2,baseline,sens_num=50;offset_cal=UNCAL;offset_unit=nA;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,15,~15,baseline repeat (end)
+R,restore,sens_num=50;offset_cal=UNCAL;offset_unit=nA;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,30,~15,restore; 1 Hz logger keeps running

@@ -1,0 +1,34 @@
+# MonC (15IDC:A3) SR570 per-gain calibration, written by analysis/make_monc_calibration.py (sha256 f7963c7c8b98ba09, with monc_grid.py 97b21034e2233e54). Deterministic: regenerate and diff.
+# source monc_sweep_steps_20261112_154045.csv sha256 b67ba6cd7c7d986cb3cb8c4875cb6820ad85d08f9b65146bbf539078a60764be; grids g2,g3,g4; 92 dark passes 2026-11-12 15:40 - 2026-11-13 08:10
+# valid for MonC's SR570 unit as installed 2026-11-12; re-measure after a swap or repair. MonP (A2): not measured, use the fallback.
+# factors are relative to the mean SR570 CAL level (absolute scale not measured: type B, write-up term 0.007)
+# darks taken with the MonC chamber cabled (no beam): they include +21.5 +- 1.3 Hz at every gain from the chamber connection; leakage current -2.6 +- 12.8 pA (analysis/monc_leak.py, 2026-11-13)
+index,sensitivity,measured,factor,u_factor_rel,dark_Hz,dark_sd_reselect_Hz,dark_sd_same_Hz,n_passes
+0,1 pA/V,0,1.00000,0.00700,,,,0
+1,2 pA/V,0,1.00000,0.00700,,,,0
+2,5 pA/V,0,1.00000,0.00700,,,,0
+3,10 pA/V,0,1.00000,0.00700,,,,0
+4,20 pA/V,0,1.00000,0.00700,,,,0
+5,50 pA/V,0,1.00000,0.00700,,,,0
+6,100 pA/V,0,1.00000,0.00700,,,,0
+7,200 pA/V,0,1.00000,0.00700,,,,0
+8,500 pA/V,0,1.00000,0.00700,,,,0
+9,1 nA/V,0,1.00000,0.00700,,,,0
+10,2 nA/V,0,1.00000,0.00700,,,,0
+11,5 nA/V,0,1.00000,0.00700,,,,0
+12,10 nA/V,0,1.00000,0.00700,,,,0
+13,20 nA/V,0,1.00000,0.00700,,,,0
+14,50 nA/V,0,1.00000,0.00700,,,,0
+15,100 nA/V,0,1.00000,0.00700,,,,0
+16,200 nA/V,0,1.00000,0.00700,538.6,21.6,,92
+17,500 nA/V,1,1.00060,0.00010,217.3,7.8,,92
+18,1 uA/V,1,1.00216,0.00009,111.6,3.8,,92
+19,2 uA/V,1,0.99859,0.00020,94.6,2.5,,92
+20,5 uA/V,1,0.99976,0.00013,20.0,1.0,0.42,92
+21,10 uA/V,1,1.00124,0.00015,13.6,0.6,,92
+22,20 uA/V,1,1.00599,0.00030,604.7,18.9,,92
+23,50 uA/V,0,1.00000,0.00700,,,,0
+24,100 uA/V,0,1.00000,0.00700,,,,0
+25,200 uA/V,0,1.00000,0.00700,,,,0
+26,500 uA/V,0,1.00000,0.00700,,,,0
+27,1 mA/V,0,1.00000,0.00700,,,,0

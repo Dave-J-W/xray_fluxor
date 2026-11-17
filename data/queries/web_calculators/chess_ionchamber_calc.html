@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TMQYL1NQ2Y"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "G-TMQYL1NQ2Y", {"groups":"default","cookie_domain":"chess.cornell.edu","page_placeholder":"PLACEHOLDER_page_location"});</script>
+<meta name="Generator" content="Drupal 11 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/sites/default/files/favicon_0.png" type="image/png" />
+<link rel="canonical" href="https://www.chess.cornell.edu/userstechnical-resourcescalculators/ion-chamber-flux-calculator" />
+<link rel="shortlink" href="https://www.chess.cornell.edu/node/212" />
+<script>window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overlays=[];a2a_config.templates={};</script>
+
+    <title>Ion Chamber Flux Calculator | CHESS</title>
+    <link rel="stylesheet" media="all" href="/sites/default/files/css/css_xMw0TErI9kqQvvBnujXJ4jg-y4rN5p68BnB52J_h9P8.css?delta=0&amp;language=en&amp;theme=chess&amp;include=eJw1i1EKgCAQBS8keqZVNxNWF3xW2OmTyp_HPIahGLtSHY5-sFvT2k3YGXBJ1JOYIAQM5wm8uExNibF-1TidNp7UCkm-2WCgc_myM_MF964tGg_hB1X8L0M" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_lJb6ibU_tJgAjRJzzTuL5emAkTEocmYRk3Ew8-2Ak-4.css?delta=1&amp;language=en&amp;theme=chess&amp;include=eJw1i1EKgCAQBS8keqZVNxNWF3xW2OmTyp_HPIahGLtSHY5-sFvT2k3YGXBJ1JOYIAQM5wm8uExNibF-1TidNp7UCkm-2WCgc_myM_MF964tGg_hB1X8L0M" />
+
+    
+  </head>
+  <body class="path-node page-node-type-page">
+        <a href="#main-content" class="visually-hidden focusable skip-link">
+      Skip to main content
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+      <section role="dialog">
+      <div class="region region-alert">
+    <div id="block-block-alerts" class="block block-views block-views-blockalerts-block-alerts">
+  
+    
+      <div class="views-element-container" block="block-block-alerts"><div class="view view-alerts view-id-alerts view-display-id-block_alerts js-view-dom-id-2800d4fc793c90ebc16315736c76ebead30b904385879d0196e43d6ded1a4882">
+  
+    
+      
+  
+          </div>
+</div>
+
+  </div>
+<div data-drupal-messages-fallback class="hidden"></div>
+
+  </div>
+
+  </section>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid cwdheader">
+      <div class="navbar-header">
+          <div class="region region-navbar-header">
+    <div id="block-chess-branding" class="block block-system block-system-branding-block">
+  
+    
+        <a href="/" rel="home" class="site-logo">
+      <img src="/themes/custom/chess/logo.svg" alt="Home" />
+    </a>
+      </div>
+
+  </div>
+
+      </div>
+      <div class="cwdsearchnav">
+          <div class="region region-navbar-collapse">
+    <nav class="dropdown-menu dropdown-menu-on-demand" id="main-navigation" aria-label="Main Navigation">
+  <a id="mobile-home" href="/"><span class="sr-only">Home</span></a>
+        
+        <ul class="menu list-menu links">
+                  <li class="menu-item menu-item--collapsed">
+        <a href="/chess-status-page" title="CHESS Status" data-drupal-link-system-path="node/1252">Status</a>
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="/science" title="Science at CHESS" data-drupal-link-system-path="node/7">Science</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item">
+        <a href="/science/conservation-science-easl" data-drupal-link-system-path="node/1826">Conservation Science EASL</a>
+              </li>
+                <li class="menu-item">
+        <a href="/science/biology" data-drupal-link-system-path="node/206">Biology</a>
+              </li>
+                <li class="menu-item">
+        <a href="/science/chemistry" data-drupal-link-system-path="node/102">Chemistry</a>
+              </li>
+                <li class="menu-item">
+        <a href="/science/energy" data-drupal-link-system-path="node/109">Energy</a>
+              </li>
+                <li class="menu-item">
+        <a href="/science/engineering" data-drupal-link-system-path="node/106">Engineering</a>
+              </li>
+                <li class="menu-item">
+        <a href="/science/materials" data-drupal-link-system-path="node/107">Materials</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/science/x-ray-technology" data-drupal-link-system-path="node/103">X-Ray Technology</a>
+              </li>
+                <li class="menu-item">
+        <a href="/science/user-stories" data-drupal-link-system-path="science/user-stories">User Stories</a>
+              </li>
+                <li class="menu-item">
+        <a href="/science/science-highlights" data-drupal-link-system-path="node/811">Science Highlights</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/about/publications" data-drupal-link-system-path="node/119">Publications</a>
+              </li>
+                <li class="menu-item">
+        <a href="/science/chess-seminar-series" data-drupal-link-system-path="node/1841">Seminar Series</a>
+              </li>
+      </ul>
+    
+              </li>
+                <li class="menu-item menu-item--expanded menu-item--active-trail">
+        <a href="/users" data-drupal-link-system-path="node/77">Users</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item">
+        <a href="/users/prospective-user-guide" title="Learn more about writing proposals and how they are reviewed." data-drupal-link-system-path="node/1468">What&#039;s the process? - Prospective User Guide</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/user-guide" title="CHESS typically provides beamtime to users for 125 days per year. Users can apply for beamtime each cycle through general user proposals and BTRs using BeamPASS" data-drupal-link-system-path="node/1495">User Guide</a>
+              </li>
+                <li class="menu-item">
+        <a href="/users/beamlines" title="Learn more about our beamlines and capabilities here" data-drupal-link-system-path="node/889">Beamline Directory</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/users/chess-deadlines" data-drupal-link-system-path="node/791">CHESS Deadlines</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.classe.cornell.edu/research/accelerator-rd/cesr/cesr-operations-schedule">X-Ray Run Schedule</a>
+              </li>
+                <li class="menu-item">
+        <a href="/users/shipping" data-drupal-link-system-path="node/80">Shipping</a>
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="/users/safety" data-drupal-link-system-path="node/78">Safety</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item">
+        <a href="/safety/orientation.html" data-drupal-link-system-path="node/209">In-Person User Orientation and Safety Training</a>
+              </li>
+                <li class="menu-item">
+        <a href="/users/chess-btr-change-requests" data-drupal-link-system-path="node/1843">BTR Change Requests</a>
+              </li>
+      </ul>
+    
+              </li>
+                <li class="menu-item">
+        <a href="/travel-lodging" data-drupal-link-system-path="node/82">Travel and Lodging</a>
+              </li>
+                <li class="menu-item">
+        <a href="/users/acknowledgments" data-drupal-link-system-path="node/81">Acknowledgments</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.chess.cornell.edu/user-agreement">User Agreement</a>
+              </li>
+                <li class="menu-item">
+        <a href="/chess-status-page" data-drupal-link-system-path="node/1252">CHESS Status Page</a>
+              </li>
+                <li class="menu-item menu-item--expanded menu-item--active-trail">
+        <a href="/users/resources" data-drupal-link-system-path="node/626">Technical Resources</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item">
+        <a href="/users/resources/affiliated-resources" data-drupal-link-system-path="node/624">Affiliated Resources</a>
+              </li>
+                <li class="menu-item menu-item--collapsed menu-item--active-trail">
+        <a href="/userstechnical-resources/calculators" data-drupal-link-system-path="node/208">Calculators</a>
+              </li>
+                <li class="menu-item">
+        <a href="/users/resources/computing" data-drupal-link-system-path="node/79">Computing</a>
+              </li>
+                <li class="menu-item">
+        <a href="/users/resources/detectors" data-drupal-link-system-path="node/462">Detectors</a>
+              </li>
+                <li class="menu-item">
+        <a href="/userstechnical-resources/video-backgrounds" data-drupal-link-system-path="node/1208">Video Backgrounds</a>
+              </li>
+      </ul>
+    
+              </li>
+      </ul>
+    
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="/facilities" data-drupal-link-system-path="node/10">Facilities</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item">
+        <a href="/partners/becoming-partner" data-drupal-link-system-path="node/205">Becoming a Partner</a>
+              </li>
+                <li class="menu-item">
+        <a href="/partners/chexs" data-drupal-link-system-path="node/838">CHEXS</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/high-magnetic-field-x-ray-beamline" data-drupal-link-system-path="node/1276">HMF Beamline</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/facilities/msn-c" title="Materials Solutions Network at CHESS" data-drupal-link-system-path="node/851">MSN-C</a>
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="/macchess" data-drupal-link-system-path="node/2">MacCHESS</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item menu-item--collapsed">
+        <a href="/macchess/mx" title="Protein Crystallography" data-drupal-link-system-path="node/1757">Crystallography</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/macchess/biosaxs" data-drupal-link-system-path="node/1758">BioSAXS at MacCHESS</a>
+              </li>
+                <li class="menu-item">
+        <a href="/macchess/people" title="People of MacCHESS" data-drupal-link-system-path="node/143">People</a>
+              </li>
+                <li class="menu-item">
+        <a href="/macchess/publications" title="MacCHESS User Publications" data-drupal-link-system-path="node/117">Publications</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/macchess/biosaxs/wetlab" title="S7 chemistry lab" data-drupal-link-system-path="node/44">S7 chemistry lab</a>
+              </li>
+      </ul>
+    
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="/facilities/xleap" data-drupal-link-system-path="node/1683">XLEAP</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item">
+        <a href="/facilitiesxleap/people-xleap" data-drupal-link-system-path="node/1720">People of XLEAP</a>
+              </li>
+                <li class="menu-item">
+        <a href="/facilities/xleap/xleap-overview" data-drupal-link-system-path="node/1684">XLEAP Overview</a>
+              </li>
+                <li class="menu-item">
+        <a href="/facilities/xleap/proposed-capabilities" data-drupal-link-system-path="node/1685">Proposed Capabilities</a>
+              </li>
+                <li class="menu-item">
+        <a href="/facilitiesxleap/stay-touch" data-drupal-link-system-path="node/1520">Stay in touch</a>
+              </li>
+                <li class="menu-item">
+        <a href="/facilitiesxleap/synchrotron-x-rays-metals-plants-soils-and-environmental-systems" data-drupal-link-system-path="node/1862">XLEAP Workshop 2026</a>
+              </li>
+      </ul>
+    
+              </li>
+      </ul>
+    
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="/public" data-drupal-link-system-path="node/33">Public</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item">
+        <a href="/public/high-energy-x-ray-techniques-school-2026" data-drupal-link-system-path="node/1850">High Energy X-Ray Techniques School - 2026</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/public/events" data-drupal-link-system-path="public/events">Events</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/public/tours" title="Take a tour of the synchrotron" data-drupal-link-system-path="node/1752">Tours</a>
+              </li>
+                <li class="menu-item menu-item--collapsed">
+        <a href="/public/student-opportunities" title="Opportunities for students at CHES" data-drupal-link-system-path="node/140">Student Opportunities</a>
+              </li>
+                <li class="menu-item">
+        <a href="/public/lending-library" data-drupal-link-system-path="node/1367">Lending Library</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.chess.cornell.edu/3d-and-virtual-tours">3D and Virtual Tours</a>
+              </li>
+      </ul>
+    
+              </li>
+                <li class="menu-item">
+        <a href="/industry-programs" data-drupal-link-system-path="node/1601">Industry</a>
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="/about" data-drupal-link-system-path="node/31">About</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item">
+        <a href="/about/staff-directory" data-drupal-link-system-path="node/136">Staff Directory</a>
+              </li>
+                <li class="menu-item">
+        <a href="/about/advisory-bodies" data-drupal-link-system-path="node/428">Advisory Bodies</a>
+              </li>
+                <li class="menu-item">
+        <a href="/about/what-we-do" data-drupal-link-system-path="node/45">What we do</a>
+              </li>
+                <li class="menu-item">
+        <a href="/about/job-openings" data-drupal-link-system-path="node/714">Job Openings</a>
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="/about/news" data-drupal-link-system-path="about/news">News</a>
+                            <ul class="menu list-menu links">
+                    <li class="menu-item">
+        <a href="/about/news/chess-enewsletter" data-drupal-link-system-path="node/559">CHESS eNewsletter</a>
+              </li>
+                <li class="menu-item">
+        <a href="/aboutnews/media-resources" data-drupal-link-system-path="node/865">Media Resources</a>
+              </li>
+                <li class="menu-item">
+        <a href="/about/news/news-archive" data-drupal-link-system-path="node/271">News Archive</a>
+              </li>
+      </ul>
+    
+              </li>
+                <li class="menu-item">
+        <a href="/about/beyond-the-lab" data-drupal-link-system-path="about/beyond-the-lab">Beyond the Lab</a>
+              </li>
+                <li class="menu-item">
+        <a href="/about/history" data-drupal-link-system-path="node/32">History</a>
+              </li>
+      </ul>
+    
+              </li>
+      </ul>
+    
+
+
+  </nav>
+<div class="buttons">
+  <button class="mobile-button" id="mobile-nav">Main Menu</button>
+  <button class="mobile-button" id="cu-search-button">Toggle Search Form</button>
+</div>
+
+  </div>
+
+        <div id="cu-search" class="cwdsearch">
+          <form id="cu-search-form" tabindex="-1" role="search" method="get" action="/search/node/">
+            <label for="cu-search-query" class="sr-only">Search:</label>
+            <input type="text" id="cu-search-query" name="keys" value="" size="30">
+            <div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions">
+              <input data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+<main role="main">
+  <a id="main-content" tabindex="-1"></a>
+  <div class="container-fluid content-pre">
+    <div class="row">
+        <div class="region region-content-pre">
+    <div id="block-chess-page-title" class="block block-core block-page-title-block">
+  
+    
+      
+  <h1 class="page-title"><span class="field field--name-title field--type-string field--label-hidden">Ion Chamber Flux Calculator</span>
+</h1>
+
+
+  </div>
+
+  </div>
+
+    </div>
+  </div>
+      <div class="container-fluid content-sidebar-top">
+      <div class="row">
+        
+        
+        <div class="content-top col-xs-12">
+            <div class="region region-content-top">
+    <div id="block-block-intro-text" class="block block-views block-views-blockpage-content-block-intro-text">
+  
+    
+      <div class="views-element-container" block="block-block-intro-text"><div class="intro-text view view-page-content view-id-page_content view-display-id-block_intro_text js-view-dom-id-68f19389c3dbd1017830138da8b0a015e12e73936252bfd4cba75dd35a828a1b">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </div>
+<div id="block-block-featured-image" class="block block-views block-views-blockpage-content-block-featured-image">
+  
+    
+      <div class="views-element-container" block="block-block-featured-image"><div class="featured-image view view-page-content view-id-page_content view-display-id-block_featured_image js-view-dom-id-07d82fafcd74c8d31094005d27b66c26b600227a9b3ef1efc932ab096935a53b">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row">  <img loading="lazy" src="/sites/default/files/styles/large/public/2017-11/angle_converter_5.jpg?itok=-2c-TqJF" width="462" height="269" alt="angle converter graphic" class="image-style-large" />
+
+
+</div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </div>
+
+  </div>
+
+        </div>
+              </div>
+    </div>
+  
+  
+      <div class="container-fluid content-sidebar-primary">
+      <div class="row">
+        
+        
+        <div class="content-primary col-xs-12">
+            <div class="region region-content">
+    <div id="block-chess-content" class="block block-system block-system-main-block">
+  
+    
+      
+<article class="node node--type-page node--view-mode-full">
+
+  
+    
+
+  
+  <div class="node__content">
+    
+  </div>
+
+</article>
+
+  </div>
+<div id="block-calculator-block-ion-chamber-flux" class="block block-chess-calculation-forms block-chess-calculation-form-block">
+  
+    
+      <form action="javascript:ICFlux()" method="POST" name="ionchamberfluxform" class="calculator-form">
+  <div class="form-intro">
+    <p>X-ray attenuation/absorption data are from the <a href="https://physics.nist.gov/PhysRefData/FFast/html/form.html">NIST database</a>.</p>
+
+    <p>The average ionization enegies are obtained from the <a href="http://www-ssrl.slac.stanford.edu/mes/xafs/flux.html">SLAC web site</a>.</p>
+
+    <p>Standard CHESS chamber lengths: short: 6 cm, long: 27 cm.</p>
+  </div>
+
+  <div class="form-section">
+    <label>
+      Select gas
+      <select name="pulldown_1" size="1" onChange="select_gas();">
+        <option>Nitrogen</option>
+        <option>Argon</option>
+        <option>He</option>
+        <option>Xe</option>
+        <option>Kr</option>
+      </select>
+    </label>
+
+    <label>
+      Absorption mechanism:
+      <select name="pulldown_2" size="1" onChange="select_method();">
+        <option>Total less elastic</option>
+        <option>Mass-energy absorption coefficient</option>
+        <option>Mass photoabsorption coefficient</option>
+        <option>Total mass attenuation coefficient</option>
+      </select>
+    </label>
+
+    <label>
+      Ionization energy:
+      <input type="text" name="Ionization" size="6">
+      <span class="input-units">eV</span>
+    </label>
+
+    <label>
+      Gas density:
+      <input type="text" name="Density" size="8">
+      <span class="input-units">g/cm3</span>
+    </label>
+
+    <label>
+      Energy:
+      <input type="text" name="Energy" size="8">
+      <span class="input-units">eV</span>
+    </label>
+
+    <label>
+      Chamber length:
+      <input type="text" name="ChamberLength" size="4">
+      <span class="input-units">cm</span>
+    </label>
+
+    <label>
+      Counts:
+      <input type="text" name="Counts" size="4">
+      <span class="input-units">cts</span>
+    </label>
+
+    <label>
+     Counter range:
+      <input type="text" name="Range" size="8">
+      <span class="input-units">A/V</span>
+    </label>
+
+    <div class="form-actions">
+      <input type="submit" name="Submit" value="Calculate" class="btn btn-primary btn-sm">
+      <input type="reset" name="Reset" value="Clear" class="btn btn-default btn-sm">
+    </div>
+  </div>
+
+  <div class="form-results">
+    <h3>Results</h3>
+
+    <label>
+      Transmission:
+      <input type="text" name="Transmission" size="12">
+    </label>
+
+    <label>
+      aGas:
+      <input type="text" name="aGas" size="8">
+      <span class="input-units">cm2/g</span>
+      <input type="text" name="aGascm" size="8">
+      <span class="input-units">cm-1</span>
+    </label>
+
+    <label>
+      Current:
+      <input type="text" name="Current" size="12">
+      <span class="input-units">A</span>
+    </label>
+
+    <label>
+      Flux:
+      <input type="text" name="Flux" size="12">
+      <span class="input-units">ph/s</span>
+    </label>
+  </div>
+
+  <div class="form-notes">
+    <p>A calculator program uses a simple model to calculate the X-ray flux from the ion chamber current data. The model includes single-ionization of the gas, and does not takes into account some of the secondary effects such as charge recombination, or space-charge effect.</p>
+
+    <h6>The input parameters are:</h6>
+
+    <ul>
+      <li>Selection of the gas; the choiches are: Nitrogen, Helium, Argon, Xenon or Krypton;</li>
+      <li>Selection of absorption mechanism responsible for current production;</li>
+      <li>Average ionazation energy in eV (default values from the literature are shown).</li>
+      <li>The density of the selected gas.(default values shown for see level, at 25C)</li>
+      <li>X-ray energy in eV;</li>
+      <li>ion chamber current in Hz (counts/s)</li>
+      <li>The ion chamber current amplifier gain on A/V; and,</li>
+      <li>The length of the ion chamber in cm.</li>
+    </ul>
+
+    <h6>Example 1:</h6>
+
+    <p>
+      At station A2 with multi-layer optics at 10keV.<br>
+      The 6cm N2 ion chamber count was 109400 at 1E-6 gain. The calculated flux: 9.6E11 ph/s.
+    </p>
+
+    <h6>Example 2:</h6>
+
+    <p>
+      At station A2 with <111> optics at 50keV.<br>
+      The 6cm N2 ion chamber count was 722000 at 1E-10 gain. The calculated flux: 2.55E9 ph/s.
+    </p>
+  </div>
+
+  <div class="form-copyright">
+    &copy; Peter Revesz (pr20@cornell.edu), CHESS, (2007). last change: 11/12/2013
+  </div>
+</form>
+
+  </div>
+
+  </div>
+
+        </div>
+              </div>
+    </div>
+  
+      <div class="container-fluid content-bottom">
+      <div class="row">
+          <div class="region region-content-bottom">
+    
+  </div>
+
+      </div>
+    </div>  </main>
+
+  <footer role="contentinfo">
+    <div class="container-fluid">
+      <div class="row footer-top">
+        <div class="col-xs-12 col-sm-4 col-md-3 footer-left">
+          <a href="https://www.facebook.com/Cornell.Synchrotron/" class="footer-social-link"><img class="social-icon" src="/themes/custom/chess/img/icons/icon_facebook.png"></a>
+          <a href="https://twitter.com/CHESS_user" class="footer-social-link"><img class="social-icon" src="/themes/custom/chess/img/icons/icon_twitter.png"></a>
+          <a href="" class="footer-social-link"><img class="social-icon" src="/themes/custom/chess/img/icons/icon_flickr.png"></a>
+          <a href="https://www.linkedin.com/in/chessscience/" class="footer-social-link"><img class="social-icon" src="/themes/custom/chess/img/icons/icon_linkedin.png"></a>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9 footer-right">
+            <div class="region region-footer">
+    <nav role="navigation" aria-labelledby="block-chess-footer-menu" id="block-chess-footer" class="block block-menu navigation menu--footer">
+            
+  <h2 class="visually-hidden" id="block-chess-footer-menu">Footer menu</h2>
+  
+
+        
+                <ul block="block-chess-footer" class="menu menu--level-1">
+                    <li class="menu-item">
+        <a href="/about/news/chess-enewsletter" title="Subscribe to our monthly newsletter!" data-drupal-link-system-path="node/559">Newsletter</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.classe.cornell.edu/" target="_blank" title="CORNELL LABORATORY FOR ACCELERATOR-BASED SCIENCES AND EDUCATION — CLASSE">CLASSE</a>
+              </li>
+                <li class="menu-item">
+        <a href="/contact" data-drupal-link-system-path="contact">Contact</a>
+              </li>
+                <li class="menu-item">
+        <a href="http://allstaff.chess.cornell.edu/modules/operations/" target="_blank">Staff</a>
+              </li>
+                <li class="menu-item">
+        <a href="mailto:chess-webmaster@cornell.edu">Feedback</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.chess.cornell.edu/web-accessibility">Web Accessibility Help</a>
+              </li>
+        </ul>
+  
+
+
+  </nav>
+
+  </div>
+
+        </div>
+      </div>
+      <div class="row footer-middle">
+        <div class="col-xs-12 col-sm-5 col-md-6 footer-left">
+          <a href="http://www.cornell.edu/">
+            <img src="/themes/custom/chess/img/cornell_logo.png" class="footer-cornell-logo">
+          </a>
+        </div>
+        <div class="col-xs-12 col-sm-7 col-md-6 footer-right">
+          <!-- <img src="/themes/custom/chess/img/nsf_logo.png" class="footer-nsf-logo"> -->
+          The Cornell High Energy Synchrotron Source (CHESS) is operated and managed by Cornell University.
+        </div>
+      </div>
+      <div class="row footer-bottom">
+        <div class="col-xs-12 col-sm-7 footer-left">
+                      <span class="contact-line">CHESS/Wilson Lab</span>
+                      <span class="contact-line">161 Synchrotron Drive</span>
+                      <span class="contact-line">Ithaca, NY 14853</span>
+                  </div>
+        <div class="col-xs-12 col-sm-5 footer-right">
+          &copy; 2026 Cornell High Energy Synchrotron Source
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"","currentPath":"node\/212","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"google_analytics":{"account":"G-TMQYL1NQ2Y","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"user":{"uid":0,"permissionsHash":"422bdaef3eaece62b7d10b64e921b8abee3468e34c1fb3da116d31dc6262460e"}}</script>
+<script src="/core/assets/vendor/jquery/jquery.min.js?v=4.0.0"></script>
+<script src="/sites/default/files/js/js_J0GrDJRZ67bOd6On-WilbkFnZFDHw5gg112opIIXALI.js?scope=footer&amp;delta=1&amp;language=en&amp;theme=chess&amp;include=eJx1jFsKwCAMBC8k9UiyxiekBjRCvX1b2q9C_2aHZRCCCtqyeGFLXZoaKnEMm1k8-BmOwDQZWqW5JH0f9iYq2H3sLvE8fo9TKw-TRTJHhwZeWunKf8QJerA4RA"></script>
+<script src="https://static.addtoany.com/menu/page.js" defer></script>
+<script src="/sites/default/files/js/js_rLgn6vLjs-mib8TsCqKa9bXatFjn2cPnMdExj4HOqpM.js?scope=footer&amp;delta=3&amp;language=en&amp;theme=chess&amp;include=eJx1jFsKwCAMBC8k9UiyxiekBjRCvX1b2q9C_2aHZRCCCtqyeGFLXZoaKnEMm1k8-BmOwDQZWqW5JH0f9iYq2H3sLvE8fo9TKw-TRTJHhwZeWunKf8QJerA4RA"></script>
+
+  </body>
+</html>

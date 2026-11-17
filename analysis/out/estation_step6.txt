@@ -1,0 +1,21 @@
+E-station mono energy per beam-on period, P 98.99 kPa, T 22.2 C (stand-ins), IC-500-50, TetrAMM range from the registry (row tetramm.range, provisional RNG 0), channels 3+4
+beam-on period (UTC)  E keV  I ch3+ch4  flux best       low      high  sigma wall loss recomb central   recomb range    flux/I
+2026-11-04T20:28     20.000     2716nA   1.41e+13  1.29e+13  1.78e+13  4.57%      3.5%          0.97%   0.29-9.66% 5.192e+18
+2026-11-05T22:12      8.000     3898nA  2.592e+12  2.45e+12   3.1e+12  4.57%      0.0%          1.39%   0.42-13.86% 6.649e+17
+2026-11-06T07:44      8.000     3977nA  2.645e+12   2.5e+12  3.18e+12  4.57%      0.0%          1.41%   0.42-14.14% 6.651e+17
+2026-11-06T22:40      9.650     3982nA  4.006e+12  3.78e+12  4.81e+12  4.57%      0.0%          1.42%   0.42-14.16% 1.006e+18
+2026-11-11T17:38     10.000     2540nA  2.749e+12  2.61e+12  3.13e+12  4.57%      0.0%          0.90%   0.27-9.03% 1.082e+18
+2026-11-11T20:19     10.000     2607nA  2.822e+12  2.68e+12  3.22e+12  4.57%      0.0%          0.93%   0.28-9.27% 1.082e+18
+2026-11-12T22:40      9.300     1057nA  9.702e+11  9.23e+11  1.05e+12  4.57%      0.0%          0.38%   0.11-3.76% 9.179e+17
+
+recombination loss at each beam-on period's current, by beam height/width ratio (registry rows beam.aspect_*; the slit sizes alone give no ratio):
+  beam-on period          low 0.03 central 0.1      high 1
+  2026-11-04T20:28           0.29%       0.97%       9.66%
+  2026-11-05T22:12           0.42%       1.39%      13.86%
+  2026-11-06T07:44           0.42%       1.41%      14.14%
+  2026-11-06T22:40           0.42%       1.42%      14.16%
+  2026-11-11T17:38           0.27%       0.90%       9.03%
+  2026-11-11T20:19           0.28%       0.93%       9.27%
+  2026-11-12T22:40           0.11%       0.38%       3.76%
+flags on every beam-on period: assumed:beam.aspect_central, assumed:beam.aspect_high, assumed:beam.aspect_low, assumed:beam.width_mm, assumed:gas.p_kpa, assumed:gas.t_c, assumed:ic500.l_eff_cm, assumed:tetramm.gain_rel, assumed:tetramm.range, assumed:tetramm.unit_a, per_channel_flux_depends_on_beam_position, recombination_over_1_percent
+flux/I (ph/s per A) varies with energy (it is the sensitivity of the chamber at that energy); beam-on periods at one energy agree.

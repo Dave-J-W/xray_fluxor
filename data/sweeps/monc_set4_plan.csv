@@ -1,0 +1,36 @@
+step,block,writes,dwell_s,expected_Hz,question
+P0,prep,offset_on=OFF;offset_cal=CAL;offset_sign=+,9,dark at 50 nA/V ~55,"leave the hold: offset off, CAL mode, sign +"
+D5_a,dark5_repeat,offset_on=OFF;sens_unit=uA/V;sens_num=5,14,dark,"5 uA/V dark, repeated through the run"
+G200n_d,range_dark,offset_on=OFF;sens_unit=nA/V;sens_num=200,14,dark (may clip),offset-off dark
+G200n_l,range_lift,offset_unit=nA;offset_num=5;offset_on=ON,9,2500 + dark,CAL lift: dark = f - lift
+G200n_d2,range_dark,offset_on=OFF,14,dark,bracket
+G500n_d,range_dark,offset_on=OFF;sens_unit=nA/V;sens_num=500,14,dark (may clip),offset-off dark
+G500n_l,range_lift,offset_unit=nA;offset_num=10;offset_on=ON,9,2000 + dark,CAL lift: dark = f - lift
+G500n_d2,range_dark,offset_on=OFF,14,dark,bracket
+G1u_d,range_dark,offset_on=OFF;sens_unit=uA/V;sens_num=1,14,dark (may clip),offset-off dark
+G1u_l,range_lift,offset_unit=nA;offset_num=20;offset_on=ON,9,2000 + dark,CAL lift: dark = f - lift
+G1u_d2,range_dark,offset_on=OFF,14,dark,bracket
+G2u_d,range_dark,offset_on=OFF;sens_unit=uA/V;sens_num=2,14,dark (may clip),offset-off dark
+G2u_l,range_lift,offset_unit=nA;offset_num=50;offset_on=ON,9,2500 + dark,CAL lift: dark = f - lift
+G2u_d2,range_dark,offset_on=OFF,14,dark,bracket
+D5_b,dark5_repeat,offset_on=OFF;sens_unit=uA/V;sens_num=5,14,dark,"5 uA/V dark, repeated through the run"
+G5u_d,range_dark,offset_on=OFF;sens_unit=uA/V;sens_num=5,14,dark (may clip),offset-off dark
+G5u_l,range_lift,offset_unit=nA;offset_num=100;offset_on=ON,9,2000 + dark,CAL lift: dark = f - lift
+G5u_d2,range_dark,offset_on=OFF,14,dark,bracket
+G10u_d,range_dark,offset_on=OFF;sens_unit=uA/V;sens_num=10,14,dark (may clip),offset-off dark
+G10u_l,range_lift,offset_unit=nA;offset_num=200;offset_on=ON,9,2000 + dark,CAL lift: dark = f - lift
+G10u_d2,range_dark,offset_on=OFF,14,dark,bracket
+G20u_d,range_dark,offset_on=OFF;sens_unit=uA/V;sens_num=20,14,dark (may clip),offset-off dark
+G20u_l,range_lift,offset_unit=nA;offset_num=500;offset_on=ON,9,2500 + dark,CAL lift: dark = f - lift
+G20u_d2,range_dark,offset_on=OFF,14,dark,bracket
+D5_c,dark5_repeat,offset_on=OFF;sens_unit=uA/V;sens_num=5,14,dark,"5 uA/V dark, repeated through the run"
+L5_1uA,ladder_5uA,sens_unit=uA/V;sens_num=5;offset_num=1;offset_unit=uA;offset_on=ON,9,20000 + dark,gain x offset x V2F at the operating outputs 0.2-4 V (20-400 kHz)
+L5_2uA,ladder_5uA,offset_num=2,9,40000 + dark,gain x offset x V2F at the operating outputs 0.2-4 V (20-400 kHz)
+L5_5uA,ladder_5uA,offset_num=5,9,100000 + dark,gain x offset x V2F at the operating outputs 0.2-4 V (20-400 kHz)
+L5_10uA,ladder_5uA,offset_num=10,9,200000 + dark,gain x offset x V2F at the operating outputs 0.2-4 V (20-400 kHz)
+L5_20uA,ladder_5uA,offset_num=20,9,400000 + dark,gain x offset x V2F at the operating outputs 0.2-4 V (20-400 kHz)
+L5_off,ladder_5uA,offset_on=OFF,14,dark,
+W5_u6,uncal_5uA,offset_unit=nA;offset_num=20;offset_cal=UNCAL;off_u_put=6;offset_on=ON,14,dark + ~0.3,old baseline offset at 5 uA/V
+W5_u0,uncal_5uA,off_u_put=0,14,dark - ~3,UNCAL zero error alone
+D5_d,dark5_repeat,offset_on=OFF;sens_unit=uA/V;sens_num=5,14,dark,"5 uA/V dark, repeated through the run"
+R,restore,offset_on=OFF;sens_unit=nA/V;sens_num=50;offset_cal=UNCAL;offset_unit=nA;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,30,~16,back to the 50 nA/V baseline; interim configuration set afterwards with the user's OK

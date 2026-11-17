@@ -1,0 +1,238 @@
+["gas.p_kpa"]
+value = 98.99
+sigma = 1.0
+unit = "kPa"
+tag = "ASSUMED"
+source = "stand-in: the C-station site-mean pressure; no E-station gas pressure sensor exists (user accepted, 2026-11-14)"
+date = "2026-11-14"
+closes_with = "a pressure reading on the chamber gas line"
+legacy_id = "A7"
+note = "sigma is absolute, in the row's unit (kPa); it feeds the 'gas stand-in P,T' term whenever the caller leaves p_kpa out"
+
+["gas.t_c"]
+value = 22.2
+sigma = 2.0
+unit = "C"
+tag = "ASSUMED"
+source = "the E-hutch air temperature (a degF PV; the live E-station lane reads this PV, user confirmed 2026-11-16: \"Yes, keep it\"); it is the hutch air, not the chamber body, and no chamber temperature sensor exists (TODO.md)"
+date = "2026-11-14"
+closes_with = "a temperature sensor on the chamber body"
+legacy_id = "A7"
+note = "sigma is absolute, in the row's unit (C); it feeds the 'gas stand-in P,T' term whenever the caller leaves t_c out"
+
+["ic500.gap_mm"]
+value = 10.0
+unit = "mm"
+tag = "GIVEN"
+source = "user 2026-11-13: electrode gap 10 mm"
+date = "2026-11-14"
+
+["ic500.volts"]
+value = 1700.0
+unit = "V"
+tag = "GIVEN"
+source = "user 2026-11-13: HV driven right now at 1.7 kV"
+date = "2026-11-14"
+
+["ic500.l_eff_cm"]
+value = 5.0
+sigma = 0.03
+unit = "cm"
+tag = "GIVEN"
+source = "collection length along the beam = the electrode length, 50 mm (user, 2026-11-16, from the vendor figure of the split electrode: 50 mm along the beam, 63 mm across). The sigma is an allowance for fringe field and guard rings, which the figure does not show (the guarded CMC chamber's l_eff was 2.3 % longer than its plate); it stays at 3 % until a fringe-field run says otherwise. The sigma is relative (0.03 = 3 %), not in the row's unit"
+date = "2026-11-16"
+legacy_id = "A3"
+note = "sigma is relative"
+
+["ic500.electrode_width_mm"]
+value = 63.0
+unit = "mm"
+tag = "GIVEN"
+source = "electrode extent across the beam, 63 mm (user, 2026-11-16, vendor figure of the IC-400/IC-500 -50 split electrode). The wall-loss Monte Carlo assumes plates wide enough that only the gap matters, which holds for 63 mm"
+date = "2026-11-16"
+
+["ic500.split_band_mm"]
+value = 22.0
+unit = "mm"
+tag = "GIVEN"
+source = "height of the zig-zag split between the two electrode halves, 22 mm (user, 2026-11-16, vendor figure). A beam inside this band shares its current between the two halves by its position; the SUM of the two channels does not depend on position, a single channel does (flag per_channel_flux_depends_on_beam_position)"
+date = "2026-11-16"
+
+["ic500.plate_orientation"]
+value = "horizontal"
+unit = ""
+tag = "ASSUMED"
+source = "plates horizontal, E-vector along the plates (the MonC mounting); the wall-loss MC geometry"
+date = "2026-11-14"
+closes_with = "say how the chamber is mounted; rerun wall_loss_ic500.py and wall_loss_fit_ic500.py, update ic500.wall_fit"
+legacy_id = "A2"
+
+["ic500.wall_fit"]
+value = [17.7, 25.9, 1.36]
+unit = "keV, keV, 1"
+tag = "DERIVED"
+source = "signal wall loss fitted to the MC of analysis/wall_loss_ic500.py (horizontal plates, centred beam, 0.1 mm FWHM); the rounded fit is checked by analysis/wall_loss_fit_ic500.py. Order: E0, s, p"
+date = "2026-11-14"
+legacy_id = "A5"
+
+["terms.mu_en_tables_rel"]
+value = 0.03
+unit = "1"
+tag = "CHOICE"
+source = "spread of NIST vs Chantler/Elam (physics_note 3.7); the MonP term reused for this chamber"
+date = "2026-11-14"
+legacy_id = "A15"
+
+["terms.w_rel"]
+value = 0.006
+unit = "1"
+tag = "CHOICE"
+source = "spread of five sources, as a 1-sigma; the MonP term reused for this chamber"
+date = "2026-11-14"
+legacy_id = "A15"
+
+["terms.density_rel"]
+value = 0.002
+unit = "1"
+tag = "CHOICE"
+source = "as MonP; the real P, T source for flowing N2 is open (A7)"
+date = "2026-11-14"
+legacy_id = "A15"
+
+["terms.energy_readback_rel"]
+value = 0.004
+unit = "1"
+tag = "ASSUMED"
+source = "mono energy readback (user 2026-11-17, 'Add the term'): an assumed 0.1 % energy error (dE/E) times d ln(flux)/d ln E, which is at most 3.3 for this chamber (best estimate at 29.5 keV; 2.2 below 15 keV); carried as 0.4 %, the C-station value (calc/quality_slots.py SYMMETRIC_TERMS), which covers it. The E-station energy is the side-bounce mono"
+date = "2026-11-17"
+closes_with = "an edge scan (a foil K edge) at the working energy, giving the readback's real error"
+
+["recomb.alpha_cm3_s"]
+value = 1.6e-6
+unit = "cm3/s"
+tag = "CHOICE"
+source = "ion-pair recombination coefficient of air at 1 atm, a textbook value used for BOTH carriers, which overstates the loss in N2 where the negative carrier is a free electron"
+date = "2026-11-14"
+legacy_id = "A8"
+
+["recomb.mobility_cm2_vs"]
+value = 1.8
+unit = "cm2/V/s"
+tag = "CHOICE"
+source = "textbook ion mobility, used for BOTH carriers, which overstates the loss in N2 where the negative carrier is a free electron"
+date = "2026-11-14"
+legacy_id = "A8"
+
+["beam.width_mm"]
+value = 1.0
+unit = "mm"
+tag = "ASSUMED"
+source = "beam width along the plate from the white-beam slit set 2 (1.00 x 1.00 mm in every November window); the slits sit outside the Gaussian hot zone, so this is an upper bound on the beam"
+date = "2026-11-14"
+closes_with = "the slit distance and the real beam FWHM"
+legacy_id = "A28"
+
+["beam.aspect_central"]
+value = 0.1
+unit = "1"
+tag = "ASSUMED"
+source = "beam height / width; the symmetric 1x1 mm slits carry no ratio information; undulator beams are usually wider than tall (MonC's was 33:1)"
+date = "2026-11-14"
+closes_with = "the beam's real height and width, from a screen or a knife-edge scan"
+legacy_id = "A29"
+
+["beam.aspect_low"]
+value = 0.03
+unit = "1"
+tag = "ASSUMED"
+source = "lower end of the beam height / width range for the recombination sensitivity"
+date = "2026-11-14"
+closes_with = "the beam's real height and width, from a screen or a knife-edge scan"
+legacy_id = "A29"
+
+["beam.aspect_high"]
+value = 1.0
+unit = "1"
+tag = "ASSUMED"
+source = "upper end of the beam height / width range: the symmetric slits taken at face value, the conservative case"
+date = "2026-11-14"
+closes_with = "the beam's real height and width, from a screen or a knife-edge scan"
+legacy_id = "A29"
+
+["recomb.apply_to_best"]
+value = true
+unit = ""
+tag = "CHOICE"
+source = "whether the recombination correction is applied to the best estimate. True because an uncorrected recombination always understates the flux. Chosen in the 2026-11-14 plan; this reverses the earlier convention (old A19: the best estimate carries known, modelled corrections only, recombination goes to the high bound). Confirmed by the user on 2026-11-16 (\"Yes, keep it\")"
+date = "2026-11-14"
+legacy_id = "A19"
+
+["tetramm.gain_rel"]
+value = 0.01
+unit = "1"
+tag = "ASSUMED"
+source = "gain accuracy placeholder: neither the manual's text nor the order code gives a figure"
+date = "2026-11-14"
+closes_with = "the order code and its accuracy table, or a calibration against a known current source"
+legacy_id = "A10"
+
+["tetramm.dark_sigma_nA"]
+value = 1.0
+unit = "nA"
+tag = "ASSUMED"
+source = "residual dark offset after the caller's dark is subtracted: the E-station dark moved by about 1 nA from week to week (Experimenter note 2026-11-13)"
+date = "2026-11-14"
+closes_with = "a dark measured the same day"
+legacy_id = "A11"
+
+["tetramm.unit_a"]
+value = 1e-9
+unit = "A"
+tag = "ASSUMED"
+source = "unit of the IOC values at the E-station: nA (CurrentScale 1e9, Experimenter 2026-11-13); the unit field is empty"
+date = "2026-11-14"
+closes_with = "confirm whether the IOC offsets are in use during a measurement"
+legacy_id = "A14"
+
+["tetramm.range"]
+value = 0
+unit = "index"
+tag = "PROVISIONAL"
+source = "range inferred as +-120 uA (RNG 0): signals of 0.2-6 uA were recorded unclipped; range, bias and offsets are not archived"
+date = "2026-11-14"
+closes_with = "the new settings log on the production host, from 2026-11-14 03:25 UTC"
+legacy_id = "A24"
+
+["fx4.gain_rel"]
+value = 0.01
+unit = "1"
+tag = "ASSUMED"
+source = "gain accuracy placeholder: the FX4 manual's text gives no figure"
+date = "2026-11-14"
+closes_with = "the order code and its accuracy table, or a calibration against a known current source"
+legacy_id = "A10"
+
+["fx4.dark_sigma_a"]
+value = 1e-9
+unit = "A"
+tag = "ASSUMED"
+source = "residual dark offset after the caller's dark is subtracted, taken equal to the TetrAMM's (the E-station dark moved by about 1 nA from week to week)"
+date = "2026-11-14"
+closes_with = "a dark measured the same day"
+legacy_id = "A11"
+
+["sr570.electronics_rel"]
+value = 0.007
+unit = "1"
+tag = "DERIVED"
+source = "SR570 gain x V2F scale incl. loading, type B (ELECTRONICS_CONCLUSIONS.md; user 2026-11-13)"
+date = "2026-11-14"
+
+["spectrum.fractions"]
+value = [[1.0, 1.0]]
+unit = "photon fraction"
+tag = "CHOICE"
+source = "user, 2026-11-14: monochromators are fairly good at monochromating"
+date = "2026-11-14"
+legacy_id = "A27"
+note = "list of [energy multiple of the mono energy, photon fraction]; fractions sum to 1"

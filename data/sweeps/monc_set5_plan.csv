@@ -1,0 +1,29 @@
+step,block,writes,dwell_s,expected_Hz,question
+P0,prep,offset_on=OFF;offset_cal=CAL;offset_sign=+,9,dark at 50 nA/V,"offset off, CAL mode, sign +"
+D5_a,dark5_repeat,sens_unit=uA/V;sens_num=5,14,dark,5 uA/V dark repeat
+S1u_d,range_dark,offset_on=OFF;sens_unit=uA/V;sens_num=1,14,dark,dark before ladder
+S1u_200nA,ladder_1uA,offset_num=200;offset_unit=nA;offset_on=ON,9,20000 + dark,gain x offset x V2F at operating outputs
+S1u_500nA,ladder_1uA,offset_num=500;offset_unit=nA,9,50000 + dark,gain x offset x V2F at operating outputs
+S1u_1uA,ladder_1uA,offset_num=1;offset_unit=uA,9,100000 + dark,gain x offset x V2F at operating outputs
+S1u_2uA,ladder_1uA,offset_num=2;offset_unit=uA,9,200000 + dark,gain x offset x V2F at operating outputs
+S1u_d2,range_dark,offset_on=OFF,14,dark,dark after ladder
+S2u_d,range_dark,offset_on=OFF;sens_unit=uA/V;sens_num=2,14,dark,dark before ladder
+S2u_500nA,ladder_2uA,offset_num=500;offset_unit=nA;offset_on=ON,9,25000 + dark,gain x offset x V2F at operating outputs
+S2u_1uA,ladder_2uA,offset_num=1;offset_unit=uA,9,50000 + dark,gain x offset x V2F at operating outputs
+S2u_2uA,ladder_2uA,offset_num=2;offset_unit=uA,9,100000 + dark,gain x offset x V2F at operating outputs
+S2u_5uA,ladder_2uA,offset_num=5;offset_unit=uA,9,250000 + dark,gain x offset x V2F at operating outputs
+S2u_d2,range_dark,offset_on=OFF,14,dark,dark after ladder
+S10u_d,range_dark,offset_on=OFF;sens_unit=uA/V;sens_num=10,14,dark,dark before ladder
+S10u_2uA,ladder_10uA,offset_num=2;offset_unit=uA;offset_on=ON,9,20000 + dark,gain x offset x V2F at operating outputs
+S10u_5uA,ladder_10uA,offset_num=5;offset_unit=uA,9,50000 + dark,gain x offset x V2F at operating outputs
+S10u_10uA,ladder_10uA,offset_num=10;offset_unit=uA,9,100000 + dark,gain x offset x V2F at operating outputs
+S10u_20uA,ladder_10uA,offset_num=20;offset_unit=uA,9,200000 + dark,gain x offset x V2F at operating outputs
+S10u_d2,range_dark,offset_on=OFF,14,dark,dark after ladder
+S20u_d,range_dark,offset_on=OFF;sens_unit=uA/V;sens_num=20,14,dark,dark before ladder
+S20u_5uA,ladder_20uA,offset_num=5;offset_unit=uA;offset_on=ON,9,25000 + dark,gain x offset x V2F at operating outputs
+S20u_10uA,ladder_20uA,offset_num=10;offset_unit=uA,9,50000 + dark,gain x offset x V2F at operating outputs
+S20u_20uA,ladder_20uA,offset_num=20;offset_unit=uA,9,100000 + dark,gain x offset x V2F at operating outputs
+S20u_50uA,ladder_20uA,offset_num=50;offset_unit=uA,9,250000 + dark,gain x offset x V2F at operating outputs
+S20u_d2,range_dark,offset_on=OFF,14,dark,dark after ladder
+D5_b,dark5_repeat,sens_unit=uA/V;sens_num=5,14,dark,5 uA/V dark repeat
+R,restore,offset_on=OFF;sens_unit=nA/V;sens_num=50;offset_cal=UNCAL;offset_unit=nA;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,30,~16,back to the 50 nA/V baseline

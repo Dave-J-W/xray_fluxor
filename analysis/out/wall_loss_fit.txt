@@ -1,0 +1,37 @@
+Signal wall loss = f_pe(E) x MC loss per photoabsorption; fit 1 - exp(-((E-E0)/s)^p) above E0
+  inputs: analysis/out/wall_loss_mc.csv, data/queries/out/xraydb_N.csv
+  minimax fit   E0 17.500  s 19.100  p 1.0800   max |fit - target| 0.0088
+  rounded fit   E0 17.5  s 19.1  p 1.08   max |fit - target| 0.0088
+  live WALL_FIT (17.5, 19.1, 1.08)  (calc/quality_slots.py)
+
+  E keV   f_pe    MC loss   target   live fit   live - target
+      8  0.9997   0.0000   0.0000   0.0000    +0.0000
+     10  0.9993   0.0000   0.0000   0.0000    +0.0000
+     12  0.9984   0.0000   0.0000   0.0000    +0.0000
+     13  0.9978   0.0000   0.0000   0.0000    +0.0000
+     14  0.9969   0.0000   0.0000   0.0000    -0.0000
+     15  0.9959   0.0001   0.0001   0.0000    -0.0001
+     16  0.9943   0.0016   0.0016   0.0000    -0.0016
+     17  0.9929   0.0089   0.0088   0.0000    -0.0088
+     18  0.9903   0.0283   0.0280   0.0194    -0.0086
+     20  0.9857   0.0988   0.0974   0.1053    +0.0078
+     22  0.9786   0.1897   0.1856   0.1893    +0.0037
+     25  0.9636   0.3254   0.3136   0.3054    -0.0082
+     28  0.9391   0.4407   0.4139   0.4079    -0.0060
+     30  0.9245   0.4995   0.4618   0.4688    +0.0070
+  live fit max |error| 0.0088; live constants EQUAL the rounded fit
+
+Band coverage with the live constants (target inside [lo, hi] at E_eff, tolerance 2 MC s.e.):
+  wall_loss_mc.csv                                        all covered
+  wall_loss_mc_gap10.00mm_sig0.80_off0.0mm_rho1.000.csv   all covered
+  wall_loss_mc_gap10.00mm_sig1.00_off0.0mm_rho0.970.csv   all covered
+  wall_loss_mc_gap10.00mm_sig1.00_off0.0mm_rho1.030.csv   all covered
+  wall_loss_mc_gap10.00mm_sig1.00_off1.0mm_rho1.000.csv   all covered
+  wall_loss_mc_gap10.00mm_sig1.20_off0.0mm_rho1.000.csv   all covered
+  wall_loss_mc_gap11.11mm_sig1.00_off0.0mm_rho1.000.csv   all covered
+  wall_loss_mc_gap11.11mm_sig1.20_off0.0mm_rho1.000.csv   all covered
+  wall_loss_mc_gap9.09mm_sig0.80_off0.0mm_rho1.000.csv    all covered
+  wall_loss_mc_gap9.09mm_sig0.80_off1.0mm_rho1.000.csv    MISSES: 16 keV target 0.0484 band [0.0000, 0.0400]; 17 keV target 0.0790 band [0.0000, 0.0400]; 18 keV target 0.1127 band [0.0000, 0.0981]; 22 keV target 0.2857 band [0.1004, 0.2793]; 25 keV target 0.4107 band [0.2048, 0.3954]  [stress case, not gated]
+  wall_loss_mc_gap9.09mm_sig1.00_off0.0mm_rho1.000.csv    all covered
+  covered 100 of 100 gated points (central, single variants, two-change corners)
+PASS

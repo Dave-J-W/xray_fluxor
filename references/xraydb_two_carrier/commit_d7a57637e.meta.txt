@@ -1,0 +1,4 @@
+d7a57637e8d19e41f9ad6c5e2fab8cc08ae16396
+Matt Newville 2021-05-03T20:06:36Z
+no factor of 2 -- energy is converted to electron/ion pairs
+https://github.com/xraypy/XrayDB/commit/d7a57637e8d19e41f9ad6c5e2fab8cc08ae16396

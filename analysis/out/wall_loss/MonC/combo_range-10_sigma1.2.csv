@@ -1,0 +1,21 @@
+# Monte Carlo signal fraction lost to the plates (photoelectron energy carried into the plates / photon energy)
+# CMC-custom geometry (PROVISIONAL): horizontal plates (MonC), half gap 6.028 mm (electron reach x0.90 relative to the 5.425 mm half gap), horizontal polarization, 0.03 mm FWHM beam (across the gap) offset 0.53 mm, elastic sigma x1.20, E-vector PARALLEL to the plates (MonC); N2 density 1.12206e-03 g/cm3 = x1.000 of 99.26 kPa, 24.9 C (the MC reference rho0)
+E_keV,loss_frac,stat_err,frac_electrons_hitting
+8,0.00000,0.00000,0.0000
+10,0.00000,0.00000,0.0000
+12,0.00000,0.00000,0.0000
+13,0.00000,0.00000,0.0000
+14,0.00000,0.00000,0.0000
+15,0.00000,0.00000,0.0000
+16,0.00000,0.00000,0.0000
+17,0.00000,0.00000,0.0000
+18,0.00036,0.00006,0.0021
+18.5,0.00065,0.00009,0.0031
+19,0.00155,0.00015,0.0065
+19.5,0.00308,0.00021,0.0115
+20,0.00626,0.00032,0.0213
+21,0.01535,0.00052,0.0471
+22,0.02754,0.00072,0.0764
+25,0.09257,0.00136,0.2061
+28,0.17973,0.00184,0.3523
+30,0.22964,0.00203,0.4222

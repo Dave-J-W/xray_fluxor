@@ -1,0 +1,31 @@
+pv,samplingmethod,samplingperiod_s,purpose
+15IDC:A2sens_num,MONITOR,1,MonP SR570 sensitivity number
+15IDC:A2sens_unit,MONITOR,1,MonP SR570 sensitivity unit
+15IDC:A2offset_num,MONITOR,1,MonP SR570 offset number
+15IDC:A2offset_unit,MONITOR,1,MonP SR570 offset unit
+15IDC:A2off_u_put,MONITOR,1,MonP SR570 offset vernier (uncal)
+15IDC:A2offset_sign,MONITOR,1,MonP SR570 offset sign
+15IDC:A2offset_on,MONITOR,1,MonP SR570 offset on/off
+15IDC:A2bias_put,MONITOR,1,MonP SR570 bias voltage
+15IDC:A2bias_on,MONITOR,1,MonP SR570 bias on/off
+15IDC:A2filter_type,MONITOR,1,MonP SR570 filter type
+15IDC:A2low_freq,MONITOR,1,MonP SR570 filter low corner
+15IDC:A2high_freq,MONITOR,1,MonP SR570 filter high corner
+15IDC:A2gain_mode,MONITOR,1,MonP SR570 gain mode
+15IDC:A2invert_on,MONITOR,1,MonP SR570 invert on/off
+15IDC:A2blank_on,MONITOR,1,MonP SR570 blank on/off
+15IDC:A3sens_num,MONITOR,1,MonC SR570 sensitivity number
+15IDC:A3sens_unit,MONITOR,1,MonC SR570 sensitivity unit
+15IDC:A3offset_num,MONITOR,1,MonC SR570 offset number
+15IDC:A3offset_unit,MONITOR,1,MonC SR570 offset unit
+15IDC:A3off_u_put,MONITOR,1,MonC SR570 offset vernier (uncal)
+15IDC:A3offset_sign,MONITOR,1,MonC SR570 offset sign
+15IDC:A3offset_on,MONITOR,1,MonC SR570 offset on/off
+15IDC:A3bias_put,MONITOR,1,MonC SR570 bias voltage
+15IDC:A3bias_on,MONITOR,1,MonC SR570 bias on/off
+15IDC:A3filter_type,MONITOR,1,MonC SR570 filter type
+15IDC:A3low_freq,MONITOR,1,MonC SR570 filter low corner
+15IDC:A3high_freq,MONITOR,1,MonC SR570 filter high corner
+15IDC:A3gain_mode,MONITOR,1,MonC SR570 gain mode
+15IDC:A3invert_on,MONITOR,1,MonC SR570 invert on/off
+15IDC:A3blank_on,MONITOR,1,MonC SR570 blank on/off

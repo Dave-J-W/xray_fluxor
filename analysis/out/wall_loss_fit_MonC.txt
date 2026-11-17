@@ -1,0 +1,40 @@
+== MonC: signal wall loss = f_pe(E) x MC loss per photoabsorption (analysis/out/wall_loss/MonC/central.csv)
+  # Monte Carlo signal fraction lost to the plates (photoelectron energy carried into the plates / photon energy)
+  # CMC-custom geometry (PROVISIONAL): horizontal plates (MonC), half gap 5.425 mm (electron reach x1.00 relative to the 5.425 mm half gap), horizontal polarization, 0.03 mm FWHM beam (across the gap) offset 0.53 mm, elastic sigma x1.00, E-vector PARALLEL to the plates (MonC); N2 density 1.12206e-03 g/cm3 = x1.000 of 99.26 kPa, 24.9 C (the MC reference rho0)
+  minimax fit   E0 18.110  s 26.899  p 1.4140   max |fit - target| 0.0038
+  rounded fit   E0 18.1  s 27.0  p 1.41   max |fit - target| 0.0039
+  live WALL_FITS['MonC'] = (18.1, 27.0, 1.41)  (calc/quality_slots.py)
+  E keV   f_pe    MC loss   target   live fit   live - target
+      8  0.9997   0.0000   0.0000   0.0000    +0.0000
+     10  0.9993   0.0000   0.0000   0.0000    +0.0000
+     12  0.9984   0.0000   0.0000   0.0000    +0.0000
+     13  0.9978   0.0000   0.0000   0.0000    +0.0000
+     14  0.9969   0.0000   0.0000   0.0000    +0.0000
+     15  0.9959   0.0000   0.0000   0.0000    +0.0000
+     16  0.9943   0.0000   0.0000   0.0000    +0.0000
+     17  0.9929   0.0005   0.0005   0.0000    -0.0005
+     18  0.9903   0.0038   0.0038   0.0000    -0.0038
+   18.5  0.9891   0.0063   0.0063   0.0026    -0.0036
+     19  0.9879   0.0098   0.0097   0.0082    -0.0014
+   19.5  0.9868   0.0157   0.0154   0.0153    -0.0002
+     20  0.9857   0.0217   0.0214   0.0234    +0.0021
+     21  0.9820   0.0392   0.0385   0.0421    +0.0036
+     22  0.9786   0.0607   0.0594   0.0633    +0.0039
+     25  0.9636   0.1446   0.1394   0.1359    -0.0035
+     28  0.9391   0.2332   0.2190   0.2157    -0.0033
+     30  0.9245   0.2886   0.2668   0.2702    +0.0034
+  live constants EQUAL the rounded fit; live max |error| 0.0039
+  band coverage with the live constants (within 2 MC s.e., from 14 keV):
+    central                                all covered
+    combo_range+10_sigma0.8                all covered
+    combo_range-10_sigma1.2                all covered
+    density_0.97                           all covered
+    density_1.03                           all covered
+    offset_+1mm                            all covered
+    range_+10                              all covered
+    range_-10                              all covered
+    sigma_0.8                              all covered
+    sigma_1.2                              all covered
+    stress_range+10_sigma0.8_offset+1mm    MISSES: 18 keV 0.0530 not in [0.0000, 0.0500]; 18.5 keV 0.0606 not in [0.0000, 0.0579]  [stress case, not gated]
+  covered 140 of 140 gated points
+  MonC: PASS

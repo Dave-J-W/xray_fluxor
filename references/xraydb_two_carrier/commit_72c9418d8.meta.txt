@@ -1,0 +1,4 @@
+72c9418d862e2ccd7d2dfb43644635762167bbbf
+Matthew Newville 2022-10-14T17:57:40Z
+fix ion chamber calculation, old version failed at very high photo and/or compton scattering, new version never gives negative contributions, does not double count attenuation terms
+https://github.com/xraypy/XrayDB/commit/72c9418d862e2ccd7d2dfb43644635762167bbbf

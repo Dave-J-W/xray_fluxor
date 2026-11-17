@@ -1,0 +1,4 @@
+680fb2550878827591b1e32502d8f100dbbb62f2
+Matt Newville 2021-05-03T19:43:02Z
+improve contribution to Ion Chamber current from incoherent Compton scattering
+https://github.com/xraypy/XrayDB/commit/680fb2550878827591b1e32502d8f100dbbb62f2

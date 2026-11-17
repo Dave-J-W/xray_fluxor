@@ -1,0 +1,34 @@
+step,block,writes,dwell_s,expected_Hz,question
+R0,restore,sens_num=50;offset_cal=UNCAL;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,15,240 or ~0,bring the now-live unit to the recorded baseline
+B0,baseline,,15,240 or ~0,baseline with the unit live
+V1,vernier,off_u_put=0,7,~0 + dark,zero offset: chamber + amplifier dark only
+V2,vernier,off_u_put=25,7,1000,vernier response (nominal 40 Hz per unit at 20 nA / 50 nA/V)
+V3,vernier,off_u_put=50,7,2000,
+V4,vernier,off_u_put=100,7,4000,linearity
+V5,vernier,off_u_put=-25,7,1000,opposite sign: one sign clips at 0 Hz (unipolar V2F)
+V6,vernier,off_u_put=-50,7,2000,
+V7,vernier,off_u_put=-100,7,4000,
+S1,sign,offset_sign=-;off_u_put=50,7,2000 or 0,does offset_sign flip the vernier in UNCAL?
+S2,sign,off_u_put=-50,7,2000 or 0,
+S3,sign,offset_sign=+;off_u_put=P,7,2000,P = whichever of +50/-50 counted in V3/V6 (nominal offset 1 nA)
+L1,level,offset_num=10,7,1000,offset scales with the selected level?
+L2,level,offset_num=5,7,500,
+L3,level,offset_num=50,7,5000,
+L4,level,offset_num=20,7,2000,
+G1,gain,sens_num=1,7,100000,offset on (~1 nA): output scales as 1/sensitivity? constant term = voltage-like offset
+G2,gain,sens_num=5,7,20000,
+G3,gain,sens_num=20,7,5000,
+G4,gain,sens_num=100,7,1000,
+G5,gain,sens_num=200,7,500,
+G6,gain,sens_num=500,7,200,
+G7,gain,sens_num=50,7,2000,
+Z1,zero,offset_on=OFF,7,~0 + dark,offset off: true dark at 50 nA/V
+Z2,zero,sens_num=500,7,dark x 0.1,dark vs gain with no offset: current-like scales as 1/S
+Z3,zero,sens_num=20,7,dark x 2.5,
+Z4,zero,sens_num=5,7,dark x 10,
+Z5,zero,sens_num=1,7,dark x 50,
+Z6,zero,sens_num=50,7,= Z1,
+Z7,zero,offset_on=ON;offset_num=1,7,100,UNCAL at 1 nA level
+C1,cal,offset_cal=CAL,7,2000 or 0,calibrated 1 nA offset
+C2,cal,offset_sign=-,7,2000 or 0,calibrated sign
+R,restore,sens_num=50;offset_cal=UNCAL;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,30,= B0,back to baseline; 1 Hz logger keeps running afterwards for dark drift

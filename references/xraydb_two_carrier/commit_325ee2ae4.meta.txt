@@ -1,0 +1,4 @@
+325ee2ae4c39d8a9f847715378ec8aae6336f7d5
+Matt Newville 2023-08-02T20:31:24Z
+doc for Compton-scattering in ion chambers
+https://github.com/xraypy/XrayDB/commit/325ee2ae4c39d8a9f847715378ec8aae6336f7d5

@@ -1,0 +1,13 @@
+# E-station beam-on windows (analysis/estation_windows.py --clean-csv; PV names only in the local note)
+# Clean = E-station energy span < 0.02 keV, JJ and white-beam slits constant, net >= 500 nA, darks on both sides.
+# energy_kev = side-bounce monochromator readback (the E-station energy, per the user). energy_dcm_kev_not_estation = the other DCM, kept only to show it differs.
+# slits_mm = E-hutch JJ slits HxV; slit_h/v_mm = white-beam slit size readback, centre = its centre readback (mm).
+# net_* are net of the mean of the before/after darks; dark_* are medians of quiet samples within +-12 h. Currents in nA (unit assumed from the IOC scale).
+start_utc,minutes,energy_kev,net_ch3_nA,net_ch4_nA,slits_mm,dark3_before,dark3_after,dark4_before,dark4_after,energy_span_kev,energy_dcm_kev_not_estation,slit_h_mm,slit_v_mm,slit_h_centre_mm,slit_v_centre_mm
+2026-11-04T20:28,55,20.000,1616,1100,10x10,-0.05,0.00,-0.05,0.04,0.0000,30.001,0.9996,1.0000,0.0031,0.0008
+2026-11-05T22:12,534,8.000,2361,1537,10x10,0.14,-0.18,0.02,-0.04,0.0000,30.001,0.9997,1.0000,0.0035,0.0009
+2026-11-06T07:44,528,8.000,2405,1572,10x10,0.04,-0.21,0.09,-0.05,0.0000,30.001,0.9997,1.0000,0.0035,0.0009
+2026-11-06T22:40,979,9.650,2452,1530,10x10,-0.21,-0.16,-0.05,-0.19,0.0000,30.001,0.9999,1.0001,0.0032,0.0008
+2026-11-11T17:38,133,10.000,1544,996,10x10,0.51,0.25,-0.17,-0.33,0.0172,30.001,1.0006,0.9995,0.0024,0.0007
+2026-11-11T20:19,60,10.000,1599,1008,10x10,0.29,0.25,-0.17,-0.33,0.0000,30.001,1.0006,0.9995,0.0024,0.0007
+2026-11-12T22:40,29,9.300,651,406,10x0.008,0.13,-0.01,-0.27,-0.21,0.0000,30.001,1.0006,0.9995,0.0024,0.0007

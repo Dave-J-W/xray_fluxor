@@ -1,0 +1,5 @@
+# MC depth-dose vs Grun 1957 universal curve (air); normal-incidence pencil beam in N2 at rho0 = 1.1221e-3 g/cm3 (99.26 kPa, 24.9 C)
+E_keV,R_G_mm,peak_mc,peak_grun,x90_mc,x90_grun,frac_behind_entrance
+10,2.290,0.388,0.338,0.737,0.737,0.0391
+20,7.704,0.387,0.337,0.737,0.737,0.0386
+30,15.663,0.487,0.337,0.737,0.737,0.0345

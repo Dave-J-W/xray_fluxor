@@ -1,0 +1,8 @@
+pull dir: xray_fluxor/ ; files: ['15ID_Sensor2_Temperature_RAW_regime1_10s-native_2024-06-26_2026-03-09.csv', '15ID_Sensor2_Temperature_RAW_regime2_60s-native_2026-03-09_2026-11-12.csv']
+15ID_Sensor2_Temperature_RAW_regime1_10s-native_2024-06-26_2026-03-09.csv: n=1293705 (dropped 1109), median spacing 10 s, gaps >1 h: 18, mean 25.29 C, sd 0.72 C, 1..99 pct 23.81..26.63 C
+15ID_Sensor2_Temperature_RAW_regime2_60s-native_2026-03-09_2026-11-12.csv: n=339291 (dropped 0), median spacing 60 s, gaps >1 h: 5, mean 23.51 C, sd 1.47 C, 1..99 pct 22.13..26.79 C
+ALL: n=1632996, mean 24.92 C, sd 1.176 C (= 0.394 % in density), min/max 21.93/29.02 C
+|change| over   1 h: median 0.060 C, 95th 0.200 C, max 3.90 C (95th = 0.067 % in density)
+|change| over  24 h: median 0.170 C, 95th 0.620 C, max 4.32 C (95th = 0.208 % in density)
+|change| over  72 h: median 0.250 C, 95th 0.850 C, max 5.11 C (95th = 0.285 % in density)
+daily range: median 0.630 C, 95th 1.170 C, max 4.47 C

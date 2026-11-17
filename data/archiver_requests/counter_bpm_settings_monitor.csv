@@ -1,0 +1,14 @@
+pv,samplingmethod,samplingperiod_s,purpose
+15IDC:scaler1.S1,MONITOR,1,clock counts: real count time = S1/FREQ
+15IDC:scaler1.FREQ,MONITOR,1,clock frequency
+15IDC:scaler1.TP1,MONITOR,1,AutoCount period
+15IDC:scaler1.TP,MONITOR,1,one-shot preset time
+15IDC:scaler1.CNT,MONITOR,1,"one-shot count active (S3/S4 then cover TP, not TP1)"
+15IDC:scaler1.CONT,MONITOR,1,AutoCount/OneShot mode
+15ID:FX4_1:Range_RBV,MONITOR,1,DBPM range (its gain)
+15ID:FX4_1:BiasState_RBV,MONITOR,1,DBPM bias on/off
+15ID:FX4_1:BiasVoltage_RBV,MONITOR,1,DBPM bias voltage
+15ID:FX4_1:AveragingTime_RBV,MONITOR,1,DBPM averaging time
+15ID:FX4_1:ValuesPerRead_RBV,MONITOR,1,DBPM values per read
+15ID:FX4_1:AcquireMode,MONITOR,1,DBPM acquire mode
+15ID:FX4_1:Acquire,MONITOR,1,DBPM acquiring

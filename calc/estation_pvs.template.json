@@ -1,0 +1,7 @@
+{
+  "_comment": "Copy to estation_pvs.local.json (gitignored) and enter the real source PV names. Never commit the local file.",
+  "current3": "SOURCE:TETRAMM:CURRENT3_MEAN_NA",
+  "current4": "SOURCE:TETRAMM:CURRENT4_MEAN_NA",
+  "energy": "SOURCE:MONO:ENERGY_KEV",
+  "hutch_temp_f": "SOURCE:HUTCH:TEMPERATURE_DEGF"
+}

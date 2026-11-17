@@ -1,0 +1,40 @@
+== IC500: signal wall loss = f_pe(E) x MC loss per photoabsorption (analysis/out/wall_loss/IC500/central.csv)
+  # Monte Carlo signal fraction lost to the plates (photoelectron energy carried into the plates / photon energy)
+  # CMC-custom geometry (PROVISIONAL): horizontal plates (MonC), half gap 5.000 mm (electron reach x1.00 relative to the 5 mm half gap), horizontal polarization, 0.1 mm FWHM beam (across the gap) offset 0.00 mm, elastic sigma x1.00, E-vector PARALLEL to the plates (MonC); N2 density 1.12206e-03 g/cm3 = x1.000 of 99.26 kPa, 24.9 C (the MC reference rho0)
+  minimax fit   E0 17.728  s 25.875  p 1.3565   max |fit - target| 0.0032
+  rounded fit   E0 17.7  s 25.9  p 1.36   max |fit - target| 0.0035
+  live WALL_FITS['IC500'] = (17.7, 25.9, 1.36)  (calc/quality_slots.py)
+  E keV   f_pe    MC loss   target   live fit   live - target
+      8  0.9997   0.0000   0.0000   0.0000    +0.0000
+     10  0.9993   0.0000   0.0000   0.0000    +0.0000
+     12  0.9984   0.0000   0.0000   0.0000    +0.0000
+     13  0.9978   0.0000   0.0000   0.0000    +0.0000
+     14  0.9969   0.0000   0.0000   0.0000    +0.0000
+     15  0.9959   0.0000   0.0000   0.0000    +0.0000
+     16  0.9943   0.0000   0.0000   0.0000    +0.0000
+     17  0.9929   0.0007   0.0007   0.0000    -0.0007
+     18  0.9903   0.0053   0.0053   0.0023    -0.0030
+   18.5  0.9891   0.0098   0.0097   0.0088    -0.0009
+     19  0.9879   0.0166   0.0164   0.0169    +0.0005
+   19.5  0.9868   0.0241   0.0238   0.0263    +0.0025
+     20  0.9857   0.0335   0.0330   0.0365    +0.0035
+     21  0.9820   0.0567   0.0557   0.0589    +0.0032
+     22  0.9786   0.0847   0.0829   0.0833    +0.0004
+     25  0.9636   0.1732   0.1669   0.1636    -0.0033
+     28  0.9391   0.2643   0.2483   0.2482    -0.0000
+     30  0.9245   0.3261   0.3015   0.3046    +0.0030
+  live constants EQUAL the rounded fit; live max |error| 0.0035
+  band coverage with the live constants (within 2 MC s.e., from 14 keV):
+    central                                all covered
+    combo_range+10_sigma0.8                all covered
+    combo_range-10_sigma1.2                all covered
+    density_0.97                           all covered
+    density_1.03                           all covered
+    offset_+1mm                            all covered
+    range_+10                              all covered
+    range_-10                              all covered
+    sigma_0.8                              all covered
+    sigma_1.2                              all covered
+    stress_range+10_sigma0.8_offset+1mm    all covered  [stress case, not gated]
+  covered 140 of 140 gated points
+  IC500: PASS

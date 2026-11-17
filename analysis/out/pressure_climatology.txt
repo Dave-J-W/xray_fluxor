@@ -1,0 +1,10 @@
+source: iem_asos_LOT_2025.csv, n = 8561 reports kept, 3 rejected (outside 95-104 kPa), 2025-01-01 00:55:00 .. 2025-12-31 23:45:00 UTC
+station pressure mean = 99.262 kPa (vs 101.325: -2.04 %)
+1 sigma = 0.72 %   min/max = -3.43 % / +2.13 %
+1st..99th percentile = -1.99 % .. +1.70 %
+change over    1 h: |median| = 0.03 %   95th pct = 0.17 %   max = 1.14 %
+change over    3 h: |median| = 0.10 %   95th pct = 0.37 %   max = 1.54 %
+change over   12 h: |median| = 0.27 %   95th pct = 1.07 %   max = 2.37 %
+change over   24 h: |median| = 0.40 %   95th pct = 1.57 %   max = 2.98 %
+change over   72 h: |median| = 0.54 %   95th pct = 1.97 %   max = 4.31 %
+change over  168 h: |median| = 0.60 %   95th pct = 2.04 %   max = 3.78 %

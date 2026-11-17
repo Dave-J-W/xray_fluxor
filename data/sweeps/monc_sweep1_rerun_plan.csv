@@ -1,0 +1,29 @@
+step,block,writes,dwell_s,expected_Hz,question
+F0,baseline,sens_num=50;offset_cal=UNCAL;offset_unit=nA;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,15,~16,baseline (approached from the restore state)
+Zu50,dark_up,offset_on=OFF,9,~55,sweep-1 Z block re-run: offset-off dark per range; upward order
+Zu1,dark_up,sens_num=1,9,~465,
+Zu2,dark_up,sens_num=2,9,clip?,
+Zu5,dark_up,sens_num=5,9,clip? (55 in sweep 2),order dependence vs sweep 2 / set 3
+Zu10,dark_up,sens_num=10,9,~12,slow near-clip recovery seen in set 3
+Zu20,dark_up,sens_num=20,9,~59,
+Zu50b,dark_up,sens_num=50,9,~55,
+Zu100,dark_up,sens_num=100,9,~31,
+Zu200,dark_up,sens_num=200,9,~360,
+Zu500,dark_up,sens_num=500,9,117 or 152?,changed between sweep 2 and set 3
+Zd200,dark_down,sens_num=200,9,~360,downward order: same values = no history dependence
+Zd100,dark_down,sens_num=100,9,~31,
+Zd50,dark_down,sens_num=50,9,~55,
+Zd20,dark_down,sens_num=20,9,~59,
+Zd10,dark_down,sens_num=10,9,~12,
+Zd5,dark_down,sens_num=5,9,clip?,
+Zd2,dark_down,sens_num=2,9,clip?,
+Zd1,dark_down,sens_num=1,9,~465,
+H0,nearclip,sens_num=50;offset_on=ON;off_u_put=20,9,~580,near-clip history test at the baseline config (expected ~13 Hz at u=6)
+H1,nearclip,off_u_put=6,30,16 or 1?,u=6 approached from above
+H2,nearclip,off_u_put=0,9,1 (clip),
+H3,nearclip,off_u_put=6,30,16 or 1?,u=6 approached from below: recovers within 30 s?
+H4,nearclip,off_u_put=20,9,~580,
+H5,nearclip,off_u_put=6,30,16 or 1?,from above again
+H6,nearclip,off_u_put=-10,9,1 (clip),
+H7,nearclip,off_u_put=6,30,16 or 1?,from deep below
+R,restore,sens_num=50;offset_cal=UNCAL;offset_unit=nA;offset_num=20;offset_sign=+;off_u_put=6;offset_on=ON,30,~16,restore; 1 Hz logger keeps running

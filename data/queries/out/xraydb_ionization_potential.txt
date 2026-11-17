@@ -1,0 +1,41 @@
+# xraydb 4.6.1 ionization_potential(), queried 2026-11-12
+N2: 34.8 eV
+nitrogen: 34.8 eV
+air: 33.8 eV
+O2: 30.8 eV
+Ar: 26.4 eV
+
+# docstring (verbatim)
+return effective ionization potential for a gas or diode semiconductor, as
+appropriate for ionization chambers in the linear regime (not in the
+'proportional counter' regime) or for PIN photodiodes (not in 'avalanche' mode).
+
+Args:
+    gas (string):  name of gas or 'Si' or 'Ge'
+
+Returns:
+    ionization potential in eV
+
+Notes:
+   Data from G. F. Knoll, Radiation Detection and Measurement, Table 5-1, and
+   from ICRU Report 31, 1979.  Supported gas names and effective potentials:
+
+       ==================== ================
+        gas names            potential (eV)
+       -------------------- ----------------
+        hydrogen, H           36.5
+        helium, He            41.3
+        nitrogen, N, N2       34.8
+        oxygen, O, O2         30.8
+        neon, Ne              35.4
+        argon, Ar             26.4
+        krypton, Kr           24.4
+        xenon, Xe             22.1
+        air                   33.8
+        methane, CH4          27.3
+        carbondioxide, CO2    33.0
+        silicon, Si            3.68
+        germanium, Ge          2.97
+       ==================== ================
+
+   If the gas is not recognized the default value of 32.0 eV will be returned.

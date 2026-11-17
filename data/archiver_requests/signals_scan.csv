@@ -1,0 +1,10 @@
+pv,samplingmethod,samplingperiod_s,purpose
+15IDC:scaler1.S3,SCAN,5,MonP counts per count period
+15IDC:scaler1.S4,SCAN,5,MonC counts per count period
+15IDGen:0:userTran6.E,SCAN,5,DBPM sum (DESC "ID1 DBPM Calc"; user 2026-11-13; replaces 15IDC:userTran10.E)
+15ID:FX4_1:SumAll:MeanValue_RBV,SCAN,5,DBPM sum computed in the FX4 IOC (10 Hz source)
+15ID:FX4_1:Current1:MeanValue_RBV,SCAN,5,DBPM quadrant 1
+15ID:FX4_1:Current2:MeanValue_RBV,SCAN,5,DBPM quadrant 2
+15ID:FX4_1:Current3:MeanValue_RBV,SCAN,5,DBPM quadrant 3
+15ID:FX4_1:Current4:MeanValue_RBV,SCAN,5,DBPM quadrant 4
+S:SRcurrentAI,SCAN,5,storage-ring current: beam-present flag

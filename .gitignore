@@ -1,0 +1,27 @@
+# names real hosts / accounts — local only (CLAUDE.md, Privacy)
+F99_ACCESS.md
+site.env
+secrets.env
+__pycache__/
+*.pyc
+~$*
+
+# agent worktrees (nested checkouts)
+.claude/worktrees/
+
+# regenerated figures (raw logger still growing; rerun analysis/figures/make_figures.py)
+analysis/figures/out/
+
+# third-party paper, available at https://arxiv.org/abs/1404.3802 (user, 2026-11-13: not kept in the public repo)
+references/xraydb_two_carrier/Recine2014_arXiv1404.3802_induced_current.pdf
+
+# local PV-name configs for analysis scripts (PV names must not be tracked)
+analysis/*.local.json
+ELECTRONICS_ESTATION_TETRAMM.md
+analysis/*snapshot*.local.json
+
+# SDD scratch (subagent-driven-development workspaces)
+.superpowers/
+
+# E-station lane source PV names (calc/estation_pvs.template.json is the tracked template)
+calc/*.local.json

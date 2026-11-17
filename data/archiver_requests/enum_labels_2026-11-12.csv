@@ -1,0 +1,166 @@
+pv,index,label
+15IDC:A2sens_num,0,1
+15IDC:A2sens_num,1,2
+15IDC:A2sens_num,2,5
+15IDC:A2sens_num,3,10
+15IDC:A2sens_num,4,20
+15IDC:A2sens_num,5,50
+15IDC:A2sens_num,6,100
+15IDC:A2sens_num,7,200
+15IDC:A2sens_num,8,500
+15IDC:A2sens_unit,0,pA/V
+15IDC:A2sens_unit,1,nA/V
+15IDC:A2sens_unit,2,uA/V
+15IDC:A2sens_unit,3,mA/V
+15IDC:A2offset_num,0,1
+15IDC:A2offset_num,1,2
+15IDC:A2offset_num,2,5
+15IDC:A2offset_num,3,10
+15IDC:A2offset_num,4,20
+15IDC:A2offset_num,5,50
+15IDC:A2offset_num,6,100
+15IDC:A2offset_num,7,200
+15IDC:A2offset_num,8,500
+15IDC:A2offset_unit,0,pA
+15IDC:A2offset_unit,1,nA
+15IDC:A2offset_unit,2,uA
+15IDC:A2offset_unit,3,mA
+15IDC:A2offset_sign,0,+
+15IDC:A2offset_sign,1,-
+15IDC:A2offset_on,0,OFF
+15IDC:A2offset_on,1,ON
+15IDC:A2bias_on,0,OFF
+15IDC:A2bias_on,1,ON
+15IDC:A2filter_type,0,No filter
+15IDC:A2filter_type,1,6 dB highpass
+15IDC:A2filter_type,2,12 dB highpass
+15IDC:A2filter_type,3,6 dB bandpass
+15IDC:A2filter_type,4,6 dB lowpass
+15IDC:A2filter_type,5,12 dB lowpass
+15IDC:A2low_freq,0,0.03 Hz
+15IDC:A2low_freq,1,0.1 Hz
+15IDC:A2low_freq,2,0.3 Hz
+15IDC:A2low_freq,3,1   Hz
+15IDC:A2low_freq,4,3   Hz
+15IDC:A2low_freq,5,10   Hz
+15IDC:A2low_freq,6,30   Hz
+15IDC:A2low_freq,7,100   Hz
+15IDC:A2low_freq,8,300   Hz
+15IDC:A2low_freq,9,1   kHz
+15IDC:A2low_freq,10,3   kHz
+15IDC:A2low_freq,11,10   kHz
+15IDC:A2low_freq,12,30   kHz
+15IDC:A2low_freq,13,100   kHz
+15IDC:A2low_freq,14,300   kHz
+15IDC:A2low_freq,15,1   MHz
+15IDC:A2high_freq,0,0.03 Hz
+15IDC:A2high_freq,1,0.1 Hz
+15IDC:A2high_freq,2,0.3 Hz
+15IDC:A2high_freq,3,1   Hz
+15IDC:A2high_freq,4,3   Hz
+15IDC:A2high_freq,5,10   Hz
+15IDC:A2high_freq,6,30   Hz
+15IDC:A2high_freq,7,100   Hz
+15IDC:A2high_freq,8,300   Hz
+15IDC:A2high_freq,9,1   kHz
+15IDC:A2high_freq,10,3   kHz
+15IDC:A2high_freq,11,10   kHz
+15IDC:A2gain_mode,0,LOW NOISE
+15IDC:A2gain_mode,1,HIGH BW
+15IDC:A2gain_mode,2,LOW DRIFT
+15IDC:A2invert_on,0,OFF
+15IDC:A2invert_on,1,ON
+15IDC:A2blank_on,0,OFF
+15IDC:A2blank_on,1,ON
+15IDC:A3sens_num,0,1
+15IDC:A3sens_num,1,2
+15IDC:A3sens_num,2,5
+15IDC:A3sens_num,3,10
+15IDC:A3sens_num,4,20
+15IDC:A3sens_num,5,50
+15IDC:A3sens_num,6,100
+15IDC:A3sens_num,7,200
+15IDC:A3sens_num,8,500
+15IDC:A3sens_unit,0,pA/V
+15IDC:A3sens_unit,1,nA/V
+15IDC:A3sens_unit,2,uA/V
+15IDC:A3sens_unit,3,mA/V
+15IDC:A3offset_num,0,1
+15IDC:A3offset_num,1,2
+15IDC:A3offset_num,2,5
+15IDC:A3offset_num,3,10
+15IDC:A3offset_num,4,20
+15IDC:A3offset_num,5,50
+15IDC:A3offset_num,6,100
+15IDC:A3offset_num,7,200
+15IDC:A3offset_num,8,500
+15IDC:A3offset_unit,0,pA
+15IDC:A3offset_unit,1,nA
+15IDC:A3offset_unit,2,uA
+15IDC:A3offset_unit,3,mA
+15IDC:A3offset_sign,0,+
+15IDC:A3offset_sign,1,-
+15IDC:A3offset_on,0,OFF
+15IDC:A3offset_on,1,ON
+15IDC:A3bias_on,0,OFF
+15IDC:A3bias_on,1,ON
+15IDC:A3filter_type,0,No filter
+15IDC:A3filter_type,1,6 dB highpass
+15IDC:A3filter_type,2,12 dB highpass
+15IDC:A3filter_type,3,6 dB bandpass
+15IDC:A3filter_type,4,6 dB lowpass
+15IDC:A3filter_type,5,12 dB lowpass
+15IDC:A3low_freq,0,0.03 Hz
+15IDC:A3low_freq,1,0.1 Hz
+15IDC:A3low_freq,2,0.3 Hz
+15IDC:A3low_freq,3,1   Hz
+15IDC:A3low_freq,4,3   Hz
+15IDC:A3low_freq,5,10   Hz
+15IDC:A3low_freq,6,30   Hz
+15IDC:A3low_freq,7,100   Hz
+15IDC:A3low_freq,8,300   Hz
+15IDC:A3low_freq,9,1   kHz
+15IDC:A3low_freq,10,3   kHz
+15IDC:A3low_freq,11,10   kHz
+15IDC:A3low_freq,12,30   kHz
+15IDC:A3low_freq,13,100   kHz
+15IDC:A3low_freq,14,300   kHz
+15IDC:A3low_freq,15,1   MHz
+15IDC:A3high_freq,0,0.03 Hz
+15IDC:A3high_freq,1,0.1 Hz
+15IDC:A3high_freq,2,0.3 Hz
+15IDC:A3high_freq,3,1   Hz
+15IDC:A3high_freq,4,3   Hz
+15IDC:A3high_freq,5,10   Hz
+15IDC:A3high_freq,6,30   Hz
+15IDC:A3high_freq,7,100   Hz
+15IDC:A3high_freq,8,300   Hz
+15IDC:A3high_freq,9,1   kHz
+15IDC:A3high_freq,10,3   kHz
+15IDC:A3high_freq,11,10   kHz
+15IDC:A3gain_mode,0,LOW NOISE
+15IDC:A3gain_mode,1,HIGH BW
+15IDC:A3gain_mode,2,LOW DRIFT
+15IDC:A3invert_on,0,OFF
+15IDC:A3invert_on,1,ON
+15IDC:A3blank_on,0,OFF
+15IDC:A3blank_on,1,ON
+15IDC:scaler1.CNT,0,Done
+15IDC:scaler1.CNT,1,Count
+15IDC:scaler1.CONT,0,OneShot
+15IDC:scaler1.CONT,1,AutoCount
+15ID:FX4_1:Range_RBV,0,100 nA slow
+15ID:FX4_1:Range_RBV,1,100 nA fast
+15ID:FX4_1:Range_RBV,2,1 uA slow
+15ID:FX4_1:Range_RBV,3,1 uA fast
+15ID:FX4_1:Range_RBV,4,10 uA
+15ID:FX4_1:Range_RBV,5,100 uA
+15ID:FX4_1:Range_RBV,6,1 mA
+15ID:FX4_1:Range_RBV,7,10 mA
+15ID:FX4_1:BiasState_RBV,0,Off
+15ID:FX4_1:BiasState_RBV,1,On
+15ID:FX4_1:AcquireMode,0,Continuous
+15ID:FX4_1:AcquireMode,1,Multiple
+15ID:FX4_1:AcquireMode,2,Single
+15ID:FX4_1:Acquire,0,Done
+15ID:FX4_1:Acquire,1,Acquire
