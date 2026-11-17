@@ -83,4 +83,4 @@ Screens build with the generator; `check_screens.py --static` gives 0 failures; 
 
 
 ## Status 2026-11-17 (implementer): version 1 built
-Built in `15IDC HA` (commits 438927e to 386a26e) and `tools/export_dashboard_model.py` here. Not shipped (the user's step). Trends not built, as descoped. See `calc/HANDOFF.md`, "Flux dashboard", and `PROGRESS.md`.
+Built in `15IDC HA` (commits 438927e to 386a26e) and `tools/export_dashboard_model.py` here. **Moved here on 2026-11-17** (`op/`, `op/README.md`; `15IDC HA` vendors the `.bob`). Not shipped (the user's step). Trends not built, as descoped. See `calc/HANDOFF.md`, "Flux dashboard", and `PROGRESS.md`.

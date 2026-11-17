@@ -8,7 +8,7 @@ Date: 2026-11-17. Status: scoped with the user on 2026-11-17; waiting for the us
 | Scope | All three chambers on one dashboard: the E-station IC-500-50, MonP and MonC ("All three chambers") |
 | Audience | "Both on one screen": a big-number summary for operators on top, an expert panel below |
 | Trends | The user chose "Archived history" (hours to days back, per chamber). **Changed 2026-11-17, reported by the Experimenter session from the user: Phoebus retrieval of archived data is descoped to a long-term goal.** The lane PVs ARE now archived (see Trends), so the data exists, but version 1 builds no archive-backed plot: no Trends tab and no sparklines. To be confirmed with the user |
-| Home | The `15IDC HA` repo, generated and checked like the existing utilioc screens; shipped to the host by the user |
+| Home | The `15IDC HA` repo, generated and checked like the existing utilioc screens; shipped to the host by the user. **Superseded 2026-11-17 (user: "Yes, move them"): the generator, screen and checks live in xray_fluxor `op/`; `15IDC HA` vendors the `.bob` (`vendor_dashboard.py`) from a clone of the public repo; PLAN.md** |
 | MonC (chamber detached since 2026-11-13) | Show it like the others and rely on its own flags; no hand-edited DETACHED banner |
 | Flag bit 1 (energy above 12.5 keV, wall-loss band in use) | "informational note, no warning. The error bounds are warning enough." Then: "downgrade the 'wall-loss band on' warning away from the MonP headline label and small card into the details area." So bit 1 appears only in the details Flags tab |
 | Model parameters | "as long as all the modeling parameters are in the dashboard somewhere, make sure" |
