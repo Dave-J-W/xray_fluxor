@@ -321,7 +321,7 @@ def params_pages(L):
 def installed_page(L):
     m = MODEL["lanes"][KEYS[L["sel"]]]
     out = [label(10, 2, 1130, 34, "As installed on the IOC (live, read-only): the expression strings (.CLC fields) of each slot, with its DESC. "
-                 "These are the numbers that run; the tables on the other pages are the model they were generated from (checked by tests/check_dashboard.py --live).",
+                 "These are the numbers that run; the tables on the other pages are the model they were generated from (checked by xray_fluxor op/tests/check_dashboard.py --live).",
                  f="tiny", wrap=True)]
     col, y0 = 0, 40
     y = y0
