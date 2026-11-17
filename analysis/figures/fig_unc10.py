@@ -7,6 +7,8 @@
                       linearity, and the combined error for readings minutes, hours and days apart
   unc10_check.png     is the stated relative error honest? Grid-to-grid repeats of the same CAL step (4-9 h apart)
                       against noise + fresh dark; the absolute budget has no reference to check against
+  unc10_legacy.png    point-to-point error of the method before this repo (raw counts, no dark, no P/T correction,
+                      nominal gain ratio) against this repo, by time between the points, and for a flux or gain change
 
 Numbers come from their sources, not retyped: the live budget terms (calc/quality_slots.py SYMMETRIC_TERMS), the
 per-gain table (data/calibration/monc_sr570_ranges.csv), the weather statistics (analysis/out/pressure_climatology.txt,
@@ -204,7 +206,8 @@ def gather(lg):
                 hold=float(np.mean(holds)), n_hold=len(holds), ba=ba, rep=rep, rms_rep=rms_rep, stated_med=stated_med,
                 wander=wander, cov1=coverage(rep, 1.0), kc=k_cal(rep), cov_se=cov_se, kc_se=kc_se, nblk=nblk,
                 pr=pr, tp=tp, bm=bm, steps=steps, steps_u=steps_u, dlnE=dlnphi_dlnE(), now=state_now(lg),
-                sigma_s=QS.OTHER_TERMS, terms=dict(QS.SYMMETRIC_TERMS))
+                sigma_s=QS.OTHER_TERMS, terms=dict(QS.SYMMETRIC_TERMS), OL=offset_lags(lg), wm=weather_median(),
+                transfer=transfer_sigma_pct())
 
 
 # ---------------------------------------------------------------- the error models (fractions of the net rate)
@@ -343,7 +346,10 @@ def make_summary(lg, B):
         f"{local(nw['t1']):%d %b}): S4 {nw['S4']:.1f} Hz at {nw['setting']}.  Until it is reconnected MonC measures no "
         "beam, and its dark must be re-measured (the cabled chamber adds ~21.5 Hz, F6.2).\n"
         "MonP: the same absolute budget; its electronics were never measured, so a gain change is uncertain by up to "
-        "0.7 % (F5.3), and its dark is 182–227 Hz (F13.1).", 200)
+        "0.7 % (F5.3), and its dark is 182–227 Hz (F13.1).\n"
+        "The method before this repo (raw counts, no dark subtracted, no pressure or temperature correction, nominal gain "
+        "ratio) is the 'raw counts', 'gain change, nominal ratio' and 'dark not subtracted' rows; point to point it is "
+        "compared with this repo in unc10_legacy.", 200)
     top = header(
         fig, 0.02,
         f"MonC at 10 keV: photons/s ±{100 * B['sigma_s']:.1f} %; at one energy a reading repeats to ~{rep_h:.3f} % "
@@ -474,6 +480,208 @@ def make_check(lg, B):
     return save(fig, "unc10_check.png")
 
 
+# ---------------------------------------------------------------- figure 4: the old method against this repo
+# The method before this repo (the user, 2026-11-17): raw counts, no dark subtracted, no pressure or temperature
+# correction, and (implicitly) the nominal SR570 ratio across a gain change. This repo: dark subtracted (measured after
+# the last gain change), live density (airport pressure, tools/asos_pressure.py, hourly reports; hutch Sensor2), and
+# the measured per-gain factors (calc/monc_gain_cal.py: a DRAFT, not installed).
+LAGS_S = np.array([1, 10, 60, 600, 3600, 3 * 3600, 6 * 3600, 12 * 3600, 86400, 2 * 86400, 3 * 86400])
+LEGACY_FLUX_STEP = 0.10          # a 10 % flux change between the two points, for the unsubtracted-dark case
+MIN_STRETCH_S = 86400            # the offset record must span at least a day
+
+
+def offset_lags(lg):
+    """rms change of one 1 s count of S4 between two times τ apart, at one fixed setting (no A3 change), from the
+    longest stretch after the last A3 change. It is the offset's own wander plus the noise of both counts, in Hz."""
+    ch = sorted(t for pv in L.A3_STATE_PVS for t, *_ in lg.settings.get(pv, []) if t > lg.t_first + 0.5)
+    t0 = ch[-1] + 120
+    t1 = lg.t_last
+    if t1 - t0 < MIN_STRETCH_S:
+        return None
+    hit = L.input_changes_during(t0, t1)
+    if hit:
+        t0 = hit[-1]["t1"] + 120
+    st = L.settings_during(lg, t0, t1)
+    m = (lg.scaler_t - 1 >= t0) & (lg.scaler_t <= t1)
+    t, v = lg.scaler_t[m], lg.S4[m]
+    grid = np.full(int(round(t[-1] - t[0])) + 1, np.nan)
+    grid[np.round(t - t[0]).astype(int)] = v
+    out = []
+    for lag in LAGS_S:
+        if lag < len(grid) // 2:
+            d = grid[lag:] - grid[:-lag]
+            d = d[np.isfinite(d)]
+            out.append((lag, float(np.sqrt(np.mean(d ** 2))), len(d)))
+    return dict(t0=t0, t1=t1, lags=np.array(out), mean=float(np.nanmean(grid)), input=L.input_state_at(t1),
+                setting=f"{st['A3sens_num'][1]} {st['A3sens_unit'][1]}, {st['A3offset_cal'][1]} {st['A3offset_num'][1]} "
+                        f"{st['A3offset_unit'][1]} {st['A3offset_on'][1]}")
+
+
+def weather_median():
+    """{hours: median raw-count change %} from pressure and hutch temperature, combined in quadrature (≈)."""
+    tmed = {}
+    for line in open(L.ROOT / "analysis" / "out" / "hutch_temperature.txt", encoding="utf-8"):
+        m = re.match(r"\|change\| over\s+(\d+) h: median ([\d.]+) C", line)
+        if m:
+            tmed[int(m[1])] = 100 * float(m[2]) / (273.15 + T_C)
+    pr, _ = weather()
+    return {h: (pr[h][0], pr[h][1], tmed.get(h)) for h in pr}
+
+
+def transfer_sigma_pct():
+    vals = [float(m[1]) for line in open(L.ROOT / "analysis" / "out" / "asos_intercompare.txt", encoding="utf-8")
+            if (m := re.search(r"1 sigma\(robust\) [\d.]+ hPa = ([\d.]+) %", line))]
+    if not vals:
+        raise SystemExit("REFUSED: station-transfer scatter not found in analysis/out/asos_intercompare.txt")
+    return float(np.median(vals))
+
+
+def events(B, f):
+    """(label, old %, new %) for the cases where the two methods differ even at τ ≈ 0."""
+    cal, g5 = B["cal"], B["cal"][S_OP]
+    D5 = B["hold"]
+    rows = [(f"flux changes by {100 * LEGACY_FLUX_STEP:.0f} % between the points (dark left in, {D5:.0f} Hz)",
+             100 * LEGACY_FLUX_STEP * D5 / f, 100 * LEGACY_FLUX_STEP * B["s_same"] / f)]
+    for S in sorted(s for s, v in cal.items() if v["measured"] and s != S_OP):
+        v = cal[S]
+        fa, fb = f, f * S_OP / S                            # the same flux read at the other gain
+        if fb > F_MAX:                                      # would break the 400 kHz rule: put the other gain at f instead
+            fa, fb = f * S / S_OP, f
+        old = 100 * abs((1 + g5["dark"] / fa) / (1 + v["dark"] / fb) * (v["factor"] / g5["factor"]) - 1)
+        new = 100 * np.sqrt(v["u"] ** 2 + g5["u"] ** 2 + (B["s_same"] / fa) ** 2 + (v["dark_sd"] / fb) ** 2)
+        rows.append((f"gain change: 5 µA/V at {fa / 1e3:.0f} kHz ↔ {FE._rng(S)} at {fb / 1e3:.0f} kHz", old, new))
+    return rows
+
+
+def p2p_models(B, OL, f):
+    """Point-to-point error (%) of the ratio of two readings τ apart, steady flux, same gain: old method vs this repo.
+    Below 1 h the weather is NOT in the totals (hourly records can't resolve it); it is shown as a band '≤ 1-h value'.
+    The repo's density residual is a band: low = report resolution (two readings) ⊕ report age (≤ 1 h of weather);
+    high = √2 × station transfer ⊕ report age."""
+    tau = OL["lags"][:, 0]
+    elec = 100 * OL["lags"][:, 1] / f                       # offset wander + noise of both counts (measured)
+    scale = np.where(tau >= 3600, 100 * np.sqrt(2) * B["wander"], 0.0)   # measured at 4.3 and 8.6 h; assumed from 1 h
+    WM = B["wm"]
+    hrs = np.array(sorted(WM))
+    med = np.array([np.hypot(WM[h][0], WM[h][2] or 0) for h in hrs])
+    long_ = tau >= 3600
+    raw = np.where(long_, np.interp(np.log(np.maximum(tau / 3600, 1)), np.log(hrs), med), 0.0)
+    lo_d = np.where(long_, B["dens_lo"], 0.0)
+    hi_d = np.where(long_, B["dens_hi"], 0.0)
+    base = np.hypot(elec, scale)
+    return dict(tau=tau, elec=elec, scale=scale, raw=raw, old=np.hypot(base, raw), new_lo=np.hypot(base, lo_d),
+                new_hi=np.hypot(base, hi_d), w1h=float(med[0]), long=long_)
+
+
+def make_legacy(lg, B):
+    OL = B["OL"]
+    if OL is None:
+        say("[unc10] unc10_legacy.png: not made (no stretch of a day at one setting)")
+        return None
+    fig = plt.figure(figsize=(16, 13))
+    gt = GridSpec(1, 2, figure=fig, wspace=0.20, left=0.06, right=0.985)
+    gb = GridSpec(1, 1, figure=fig, left=0.34, right=0.90, bottom=0.06, top=0.30)
+    axes = [fig.add_subplot(gt[0, 0]), fig.add_subplot(gt[0, 1])]
+    xt = [1, 60, 3600, 86400, 3 * 86400]
+    xl = ["1 s", "1 min", "1 h", "1 day", "3 days"]
+    bound = 100 * B["terms"]["density (live P, T)"]
+    for ax, f in zip(axes, (F_TYP, F_LOW)):
+        M = p2p_models(B, OL, f)
+        tau, L_ = M["tau"], M["long"]
+        S_ = ~L_                                            # below 1 h: electronics only (weather unresolved)
+        tl = np.append(tau[S_], 3600.0)
+        base_h = float(M["elec"][L_][0])                    # the scale wander starts at 1 h (assumed), so not before
+        left = np.append(M["old"][S_], base_h)
+        ax.plot(tl, left, "-", color=ORANGE, lw=2.8)
+        ax.plot(tl, left, "-", color=BLUE, lw=1.0)
+        ax.plot(tau[L_], M["old"][L_], "-", color=ORANGE, lw=2.8, label="BEFORE: raw counts, no dark subtracted, no P/T correction")
+        ax.fill_between(tau[L_], M["new_lo"][L_], M["new_hi"][L_], color=BLUE, alpha=0.35, lw=0,
+                        label="NOW: this repo (dark subtracted, live density): somewhere in this band")
+        ax.plot(tau[L_], M["new_hi"][L_], "-", color=BLUE, lw=1.0)
+        ax.plot(tau[L_], M["new_lo"][L_], "-", color=BLUE, lw=1.0)
+        ax.plot([3600, 3600], [base_h, M["old"][L_][0]], ":", color=INK2, lw=0.8)
+        ax.fill_between(tau[L_], M["new_hi"][L_], np.full(L_.sum(), bound), color=BLUE, alpha=0.07, lw=0,
+                        label=f"… up to the {bound:.1f} % density bound (the correction is untested)")
+        hrs = np.array(sorted(B["wm"]))
+        ax.fill_between(hrs * 3600, [B["wm"][h][0] for h in hrs], [B["wm"][h][1] for h in hrs], color=ORANGE,
+                        alpha=0.12, lw=0, label="pressure change in raw counts: median to 95th percentile")
+        ax.plot(tau, M["elec"], "--", color=INK2, lw=1.2, label="electronics: offset wander + noise of both counts (measured; same in both)")
+        ax.fill_between([1, 3600], [1e-6, 1e-6], [M["w1h"]] * 2, color=GRAY, alpha=0.12, lw=0,
+                        label=f"below 1 h: + the weather, ≤ its 1-h median {M['w1h']:.3f} % (hourly records can't resolve it; "
+                              "not corrected by either method)")
+        k = int(np.argmin(np.abs(tau - 86400)))
+        ax.annotate(f"1 day: {M['old'][k]:.2f} % → {M['new_lo'][k]:.2f}–{M['new_hi'][k]:.2f} %", (tau[k], M["new_hi"][k]),
+                    xytext=(-175, -45) if f >= 1e5 else (-190, -70), textcoords="offset points", fontsize=8.5, color=INK,
+                    arrowprops=dict(arrowstyle="-", color=GRAY, lw=0.6))
+        j = int(np.argmin(np.abs(tau - 60)))
+        ax.annotate(f"1 min: {M['old'][j]:.4f} % in both (+ ≤ {M['w1h']:.2f} % weather)", (tau[j], M["old"][j]),
+                    xytext=(-20, 28), textcoords="offset points", fontsize=8.5, color=INK,
+                    arrowprops=dict(arrowstyle="-", color=GRAY, lw=0.6))
+        ax.set_xscale("log")
+        ax.set_yscale("log")
+        ax.set_xlim(1, tau[-1] * 1.2)
+        ax.set_ylim(1e-4 if f >= 1e5 else 1e-3, 5)
+        ax.set_xticks(xt)
+        ax.set_xticklabels(xl)
+        ax.set_xlabel("time between the two points")
+        ax.set_ylabel("point-to-point error of the ratio, % (typical)")
+        titled(ax, f"At {f / 1e3:.0f} kHz: how far apart can two points be?",
+               f"steady flux, same gain (5 µA/V), 1 s readings; MonC at 5 µA/V: {phot(f):.1e} ph/s at 10 keV")
+    h, l = axes[0].get_legend_handles_labels()
+    # events
+    ax = fig.add_subplot(gb[0])
+    ev = events(B, F_TYP) + [(lab + " [at 10 kHz]", o, n) for lab, o, n in events(B, F_LOW)[:1]]
+    lo_x = 1e-5
+    for i, (lab, o, n) in enumerate(ev):
+        nn = max(n, lo_x * 1.3)
+        ax.plot([nn, o], [i, i], "-", color=GRAY, lw=1.0, zorder=1)
+        ax.plot([o], [i], "o", color=ORANGE, ms=8, mec="white", zorder=3)
+        ax.plot([nn], [i], "<" if n < lo_x * 1.3 else "o", color=BLUE, ms=8, mec="white", zorder=3)
+        ax.text(1.01, i, f"{_fmt(o)} → {_fmt(n)}", transform=ax.get_yaxis_transform(), fontsize=8.5, va="center", color=INK)
+    ax.set_yticks(range(len(ev)))
+    ax.set_yticklabels([e[0] for e in ev], fontsize=8.5)
+    ax.set_ylim(len(ev) - 0.5, -0.5)
+    ax.set_xscale("log")
+    ax.set_xlim(lo_x, 10)
+    ax.grid(axis="y", visible=False)
+    ax.set_xlabel("error of the ratio of the two points, % (orange: before; blue: now; ◀ below the axis)")
+    titled(ax, "When something changes between two points, however far apart they are",
+           f"at {F_TYP / 1e3:.0f} kHz unless marked; before: nominal SR570 ratio, offset-OFF darks left in (F5.1); "
+           "now: measured per-gain factors (DRAFT slot, not installed) and a dark after the change")
+    M2 = p2p_models(B, OL, F_TYP)
+    kd = int(np.argmin(np.abs(M2["tau"] - 86400)))
+    worst_gain = max(o for _, o, _ in events(B, F_TYP)[1:])
+    top = header(
+        fig, 0.06,
+        f"Point to point, the old method is as good as this repo within an hour; across a day it is "
+        f"{M2['old'][kd] / M2['new_hi'][kd]:.0f}–{M2['old'][kd] / M2['new_lo'][kd]:.0f}× worse, and a gain change costs up "
+        f"to {worst_gain:.1f} %",
+        "MonC at 10 keV, one energy: point-to-point error of the method before this repo, and of this repo",
+        _wrap(
+            "Point-to-point error = the error in the ratio of two MonC readings that normalise two data points, after "
+            "everything common to both (absorption tables, W, collection length, the absolute gain) has cancelled. "
+            "Typical size: rms for the electronics, median for the weather.  At a steady flux and one gain, a dark left in "
+            "cancels in the ratio; it matters only when the flux or the gain changes (bottom panel).\n"
+            f"Electronics: the rms change of one 1 s count of S4 τ apart, measured over {(OL['t1'] - OL['t0']) / 86400:.1f} "
+            f"days at {OL['setting']}, {local(OL['t0']):%d %b %H:%M}–{local(OL['t1']):%d %b %H:%M}, input: {OL['input']}. It "
+            "includes the CAL source, so it is an upper bound.  From 1 h on, the scale wander of the grid repeats "
+            f"({100 * np.sqrt(2) * B['wander']:.4f} % per pair; measured at 4.3 and 8.6 h, assumed from 1 h) is added.\n"
+            "Weather: 2025 airport pressure and the 2024–26 hutch temperature (analysis/out), medians, combined in quadrature "
+            "(an approximation).  The live correction uses hourly airport reports and the hutch Sensor2: within an hour it "
+            "corrects nothing, and when a new report arrives the corrected flux steps by that hour's change.  Its residual "
+            f"between points hours apart lies between {B['dens_lo']:.3f} % (report resolution and age) and {B['dens_hi']:.3f} % "
+            f"(√2 × the {B['transfer']:.3f} % station-to-site scatter, and age); it has not been tested (UNCERTAINTY.md §7).\n"
+            "Not shown: a dark not re-measured after a gain change (flagged by status bit 2), state errors, a beam move "
+            "(0.28 %/mm, either method).  MonC's chamber is unplugged (F7.2): these are the electronics; no beam was measured.",
+            205),
+        extra_in=0.45)
+    gt.update(top=top, bottom=0.46)
+    fig.legend(h, l, loc="center", bbox_to_anchor=(0.5, 0.375), ncol=2, fontsize=7.8, frameon=False)
+    footer(fig, lg, "sources: raw logger, analysis/out/{pressure_climatology,hutch_temperature,asos_intercompare}.txt, "
+                    "data/calibration/monc_sr570_ranges.csv")
+    return save(fig, "unc10_legacy.png")
+
+
 def make(lg):
     if "night" not in L.SWEEP_FILES:
         say("[unc10] no overnight step log: skipped")
@@ -486,4 +694,7 @@ def make(lg):
         f"now: S4 {B['now']['S4']:.1f} Hz, {B['now']['setting']}, input {B['now']['input']}")
     for r in _rows(B):
         say(f"[unc10]   {r[0]:5s} {r[2]:9.5f} %" + (f" (10 kHz {r[3]:.5f} %)" if r[3] is not None else "") + f"  {r[1]}")
-    return [make_summary(lg, B), make_vs_rate(lg, B), make_check(lg, B)]
+    q = 100 * 0.01 * 3386.389 / (P_KPA * 1e3) / np.sqrt(6)   # 0.01 inHg report resolution, two readings (uniform)
+    B["dens_lo"] = float(np.hypot(q, B["pr"][1][0]))
+    B["dens_hi"] = float(np.hypot(np.sqrt(2) * B["transfer"], B["pr"][1][0]))
+    return [make_summary(lg, B), make_vs_rate(lg, B), make_check(lg, B), make_legacy(lg, B)]

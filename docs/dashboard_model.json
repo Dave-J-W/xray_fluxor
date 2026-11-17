@@ -1,0 +1,1225 @@
+{
+ "date": "2026-11-17",
+ "lanes": {
+  "estation": {
+   "asymmetric": {
+    "recombination": [
+     "userTran10.E",
+     "userTran10.F",
+     "userTran10.G"
+    ],
+    "wall_loss": "userTran10.C"
+   },
+   "chamber": "IC-500-50",
+   "expected_clc": {
+    "userTran10": {
+     "CLCB": "B*(1.1221E-3/I)^.568",
+     "CLCC": "B>17.7?1-1/EXP(((B-17.7)/25.9)^1.36):0",
+     "CLCE": "MIN(D*3555,.5)",
+     "CLCF": "MIN(D*1066.5,.5)",
+     "CLCG": "MIN(D*35550,.5)",
+     "CLCH": "(1-MAX(.9*C-.07,0))*(1-F)",
+     "CLCJ": "1-C-MIN(.09,2*C+.05*(B>13))",
+     "CLCK": "A*.954/H",
+     "CLCL": "A/(1-C)/(1-E)",
+     "CLCM": "A*1.046/J/(1-G)",
+     "CLCN": "A>0?100*(M/L-1):0",
+     "CLCO": "A>0?100*(1-K/L):0"
+    },
+    "userTran11": {
+     "CLCF": "A>12.5",
+     "CLCG": "E>.05",
+     "CLCH": "C>7200",
+     "CLCI": "D<5E-8",
+     "CLCJ": "A>=4.9&&A<=30.5?0:1",
+     "CLCK": "B>0",
+     "CLCL": "F+2*G+4*H+8*I+16*J+32*K"
+    },
+    "userTran9": {
+     "CLCG": "MAX(A+B-F,0)*1E-9",
+     "CLCH": "(D-32)/1.8",
+     "CLCI": "E*3.369238E-3/(H+273.15)",
+     "CLCJ": "LN(C)",
+     "CLCK": "EXP(7.469-J*(1.833+J*(.5342-J*.06941)))",
+     "CLCL": "EXP(6.046+J*(.4546-J*(1.762-J*.2949)))",
+     "CLCM": "1-EXP(-5*K*I)",
+     "CLCO": "A+B>=-5&&A<118800&&B<118800?0:1",
+     "CLCP": "G*2.17205E17/C/M*EXP(-5*L*I)"
+    }
+   },
+   "flags": [
+    {
+     "bit": 1,
+     "letter": "F",
+     "text": "E > 12.5 keV: wall-loss band in use"
+    },
+    {
+     "bit": 2,
+     "letter": "G",
+     "text": "recombination central loss above 5 %"
+    },
+    {
+     "bit": 4,
+     "letter": "H",
+     "text": "pressure not updated for 2 h"
+    },
+    {
+     "bit": 8,
+     "letter": "I",
+     "text": "low current: net below 50 nA, bounds understate"
+    },
+    {
+     "bit": 16,
+     "letter": "J",
+     "text": "E outside 4.9-30.5 keV (MAJOR)"
+    },
+    {
+     "bit": 32,
+     "letter": "K",
+     "text": "raw sum below -5 nA, channel >= 99 % of full scale, or NaN (MAJOR)"
+    }
+   ],
+   "high_factor": 1.046,
+   "low_factor": 0.954,
+   "name": "E-station IC-500-50",
+   "not_in_budget": [
+    "TetrAMM noise term (the low-current flag covers it)",
+    "per-channel split"
+   ],
+   "params": [
+    {
+     "closes_with": "the beam's real height and width, from a screen or a knife-edge scan",
+     "date": "2026-11-14",
+     "name": "beam.aspect_central",
+     "sigma": null,
+     "source": "beam height / width; the symmetric 1x1 mm slits carry no ratio information; undulator beams are usually wider than tall (MonC's was 33:1)",
+     "tag": "ASSUMED",
+     "unit": "1",
+     "value": 0.1
+    },
+    {
+     "closes_with": "the beam's real height and width, from a screen or a knife-edge scan",
+     "date": "2026-11-14",
+     "name": "beam.aspect_high",
+     "sigma": null,
+     "source": "upper end of the beam height / width range: the symmetric slits taken at face value, the conservative case",
+     "tag": "ASSUMED",
+     "unit": "1",
+     "value": 1.0
+    },
+    {
+     "closes_with": "the beam's real height and width, from a screen or a knife-edge scan",
+     "date": "2026-11-14",
+     "name": "beam.aspect_low",
+     "sigma": null,
+     "source": "lower end of the beam height / width range for the recombination sensitivity",
+     "tag": "ASSUMED",
+     "unit": "1",
+     "value": 0.03
+    },
+    {
+     "closes_with": "the slit distance and the real beam FWHM",
+     "date": "2026-11-14",
+     "name": "beam.width_mm",
+     "sigma": null,
+     "source": "beam width along the plate from the white-beam slit set 2 (1.00 x 1.00 mm in every November window); the slits sit outside the Gaussian hot zone, so this is an upper bound on the beam",
+     "tag": "ASSUMED",
+     "unit": "mm",
+     "value": 1.0
+    },
+    {
+     "closes_with": "a dark measured the same day",
+     "date": "2026-11-14",
+     "name": "fx4.dark_sigma_a",
+     "sigma": null,
+     "source": "residual dark offset after the caller's dark is subtracted, taken equal to the TetrAMM's (the E-station dark moved by about 1 nA from week to week)",
+     "tag": "ASSUMED",
+     "unit": "A",
+     "value": 1e-09
+    },
+    {
+     "closes_with": "the order code and its accuracy table, or a calibration against a known current source",
+     "date": "2026-11-14",
+     "name": "fx4.gain_rel",
+     "sigma": null,
+     "source": "gain accuracy placeholder: the FX4 manual's text gives no figure",
+     "tag": "ASSUMED",
+     "unit": "1",
+     "value": 0.01
+    },
+    {
+     "closes_with": "a pressure reading on the chamber gas line",
+     "date": "2026-11-14",
+     "name": "gas.p_kpa",
+     "sigma": 1.0,
+     "source": "stand-in: the C-station site-mean pressure; no E-station gas pressure sensor exists (user accepted, 2026-11-14)",
+     "tag": "ASSUMED",
+     "unit": "kPa",
+     "value": 98.99
+    },
+    {
+     "closes_with": "a temperature sensor on the chamber body",
+     "date": "2026-11-14",
+     "name": "gas.t_c",
+     "sigma": 2.0,
+     "source": "the E-hutch air temperature (a degF PV; the live E-station lane reads this PV, user confirmed 2026-11-16: \"Yes, keep it\"); it is the hutch air, not the chamber body, and no chamber temperature sensor exists (TODO.md)",
+     "tag": "ASSUMED",
+     "unit": "C",
+     "value": 22.2
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-16",
+     "name": "ic500.electrode_width_mm",
+     "sigma": null,
+     "source": "electrode extent across the beam, 63 mm (user, 2026-11-16, vendor figure of the IC-400/IC-500 -50 split electrode). The wall-loss Monte Carlo assumes plates wide enough that only the gap matters, which holds for 63 mm",
+     "tag": "GIVEN",
+     "unit": "mm",
+     "value": 63.0
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "ic500.gap_mm",
+     "sigma": null,
+     "source": "user 2026-11-13: electrode gap 10 mm",
+     "tag": "GIVEN",
+     "unit": "mm",
+     "value": 10.0
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-16",
+     "name": "ic500.l_eff_cm",
+     "sigma": 0.03,
+     "source": "collection length along the beam = the electrode length, 50 mm (user, 2026-11-16, from the vendor figure of the split electrode: 50 mm along the beam, 63 mm across). The sigma is an allowance for fringe field and guard rings, which the figure does not show (the guarded CMC chamber's l_eff was 2.3 % longer than its plate); it stays at 3 % until a fringe-field run says otherwise. The sigma is relative (0.03 = 3 %), not in the row's unit",
+     "tag": "GIVEN",
+     "unit": "cm",
+     "value": 5.0
+    },
+    {
+     "closes_with": "say how the chamber is mounted; rerun wall_loss_ic500.py and wall_loss_fit_ic500.py, update ic500.wall_fit",
+     "date": "2026-11-14",
+     "name": "ic500.plate_orientation",
+     "sigma": null,
+     "source": "plates horizontal, E-vector along the plates (the MonC mounting); the wall-loss MC geometry",
+     "tag": "ASSUMED",
+     "unit": "",
+     "value": "horizontal"
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-16",
+     "name": "ic500.split_band_mm",
+     "sigma": null,
+     "source": "height of the zig-zag split between the two electrode halves, 22 mm (user, 2026-11-16, vendor figure). A beam inside this band shares its current between the two halves by its position; the SUM of the two channels does not depend on position, a single channel does (flag per_channel_flux_depends_on_beam_position)",
+     "tag": "GIVEN",
+     "unit": "mm",
+     "value": 22.0
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "ic500.volts",
+     "sigma": null,
+     "source": "user 2026-11-13: HV driven right now at 1.7 kV",
+     "tag": "GIVEN",
+     "unit": "V",
+     "value": 1700.0
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "ic500.wall_fit",
+     "sigma": null,
+     "source": "signal wall loss fitted to the MC of analysis/wall_loss_ic500.py (horizontal plates, centred beam, 0.1 mm FWHM); the rounded fit is checked by analysis/wall_loss_fit_ic500.py. Order: E0, s, p",
+     "tag": "DERIVED",
+     "unit": "keV, keV, 1",
+     "value": [
+      17.7,
+      25.9,
+      1.36
+     ]
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "recomb.alpha_cm3_s",
+     "sigma": null,
+     "source": "ion-pair recombination coefficient of air at 1 atm, a textbook value used for BOTH carriers, which overstates the loss in N2 where the negative carrier is a free electron",
+     "tag": "CHOICE",
+     "unit": "cm3/s",
+     "value": 1.6e-06
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "recomb.apply_to_best",
+     "sigma": null,
+     "source": "whether the recombination correction is applied to the best estimate. True because an uncorrected recombination always understates the flux. Chosen in the 2026-11-14 plan; this reverses the earlier convention (old A19: the best estimate carries known, modelled corrections only, recombination goes to the high bound). Confirmed by the user on 2026-11-16 (\"Yes, keep it\")",
+     "tag": "CHOICE",
+     "unit": "",
+     "value": true
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "recomb.mobility_cm2_vs",
+     "sigma": null,
+     "source": "textbook ion mobility, used for BOTH carriers, which overstates the loss in N2 where the negative carrier is a free electron",
+     "tag": "CHOICE",
+     "unit": "cm2/V/s",
+     "value": 1.8
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "spectrum.fractions",
+     "sigma": null,
+     "source": "user, 2026-11-14: monochromators are fairly good at monochromating",
+     "tag": "CHOICE",
+     "unit": "photon fraction",
+     "value": [
+      [
+       1.0,
+       1.0
+      ]
+     ]
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "sr570.electronics_rel",
+     "sigma": null,
+     "source": "SR570 gain x V2F scale incl. loading, type B (ELECTRONICS_CONCLUSIONS.md; user 2026-11-13)",
+     "tag": "DERIVED",
+     "unit": "1",
+     "value": 0.007
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "terms.density_rel",
+     "sigma": null,
+     "source": "as MonP; the real P, T source for flowing N2 is open (A7)",
+     "tag": "CHOICE",
+     "unit": "1",
+     "value": 0.002
+    },
+    {
+     "closes_with": "an edge scan (a foil K edge) at the working energy, giving the readback's real error",
+     "date": "2026-11-17",
+     "name": "terms.energy_readback_rel",
+     "sigma": null,
+     "source": "mono energy readback (user 2026-11-17, 'Add the term'): an assumed 0.1 % energy error (dE/E) times d ln(flux)/d ln E, which is at most 3.3 for this chamber (best estimate at 29.5 keV; 2.2 below 15 keV); carried as 0.4 %, the C-station value (calc/quality_slots.py SYMMETRIC_TERMS), which covers it. The E-station energy is the side-bounce mono",
+     "tag": "ASSUMED",
+     "unit": "1",
+     "value": 0.004
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "terms.mu_en_tables_rel",
+     "sigma": null,
+     "source": "spread of NIST vs Chantler/Elam (physics_note 3.7); the MonP term reused for this chamber",
+     "tag": "CHOICE",
+     "unit": "1",
+     "value": 0.03
+    },
+    {
+     "closes_with": "",
+     "date": "2026-11-14",
+     "name": "terms.w_rel",
+     "sigma": null,
+     "source": "spread of five sources, as a 1-sigma; the MonP term reused for this chamber",
+     "tag": "CHOICE",
+     "unit": "1",
+     "value": 0.006
+    },
+    {
+     "closes_with": "a dark measured the same day",
+     "date": "2026-11-14",
+     "name": "tetramm.dark_sigma_nA",
+     "sigma": null,
+     "source": "residual dark offset after the caller's dark is subtracted: the E-station dark moved by about 1 nA from week to week (Experimenter note 2026-11-13)",
+     "tag": "ASSUMED",
+     "unit": "nA",
+     "value": 1.0
+    },
+    {
+     "closes_with": "the order code and its accuracy table, or a calibration against a known current source",
+     "date": "2026-11-14",
+     "name": "tetramm.gain_rel",
+     "sigma": null,
+     "source": "gain accuracy placeholder: neither the manual's text nor the order code gives a figure",
+     "tag": "ASSUMED",
+     "unit": "1",
+     "value": 0.01
+    },
+    {
+     "closes_with": "the new settings log on the production host, from 2026-11-14 03:25 UTC",
+     "date": "2026-11-14",
+     "name": "tetramm.range",
+     "sigma": null,
+     "source": "range inferred as +-120 uA (RNG 0): signals of 0.2-6 uA were recorded unclipped; range, bias and offsets are not archived",
+     "tag": "PROVISIONAL",
+     "unit": "index",
+     "value": 0
+    },
+    {
+     "closes_with": "confirm whether the IOC offsets are in use during a measurement",
+     "date": "2026-11-14",
+     "name": "tetramm.unit_a",
+     "sigma": null,
+     "source": "unit of the IOC values at the E-station: nA (CurrentScale 1e9, Experimenter 2026-11-13); the unit field is empty",
+     "tag": "ASSUMED",
+     "unit": "A",
+     "value": 1e-09
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.k_flux",
+     "sigma": null,
+     "source": "W_EV/(E_CHARGE*1e3) from fluxor.constants",
+     "tag": "DERIVED",
+     "unit": "photons/s per A per keV",
+     "value": 2.1720451579123453e+17
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.flag1_energy",
+     "sigma": null,
+     "source": "calc/quality_slots.FLAG1_E_KEV: wall-loss band widens above 12.5 keV at the lowest density seen (informational, bit 1)",
+     "tag": "DERIVED",
+     "unit": "keV",
+     "value": 12.5
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.flag2_recomb",
+     "sigma": null,
+     "source": "calc/estation_lane.RECOMB_FLAG_FRACTION: bit 2, central recombination above 5 %",
+     "tag": "CHOICE",
+     "unit": "fraction",
+     "value": 0.05
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.flag4_pressure_age",
+     "sigma": null,
+     "source": "bit 4: pressure not updated for 2 h (same rule as the C-station lanes)",
+     "tag": "CHOICE",
+     "unit": "s",
+     "value": 7200
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.flag8_low_current",
+     "sigma": null,
+     "source": "calc/estation_lane.LOW_CURRENT_NA: bit 8, net current below 50 nA (the TetrAMM noise term is not in the bounds; this flag covers it)",
+     "tag": "CHOICE",
+     "unit": "nA",
+     "value": 50.0
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.flag16_energy_range",
+     "sigma": null,
+     "source": "mono range the fit and tables are valid for: 4.9 to 30.5 keV (bit 16, alarm)",
+     "tag": "GIVEN",
+     "unit": "keV",
+     "value": [
+      4.9,
+      30.5
+     ]
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.flag32_raw_neg_margin",
+     "sigma": null,
+     "source": "calc/estation_lane.RAW_NEG_MARGIN_NA: bit 32, raw sum below -5 nA",
+     "tag": "CHOICE",
+     "unit": "nA",
+     "value": 5.0
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.flag32_full_scale_fraction",
+     "sigma": null,
+     "source": "calc/estation_lane.FULL_SCALE_FRACTION: bit 32, a channel at or above 99 % of full scale (118800 nA)",
+     "tag": "CHOICE",
+     "unit": "fraction of 120 uA",
+     "value": 0.99
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.wall_band",
+     "sigma": null,
+     "source": "calc/quality_slots.BAND, shared with the C-station lanes (analysis/wall_loss_fit.py)",
+     "tag": "DERIVED",
+     "unit": "a,b,cap,k,floor,e_widen",
+     "value": {
+      "a": 0.9,
+      "b": 0.07,
+      "cap": 0.09,
+      "e_widen": 13,
+      "floor": 0.05,
+      "k": 2
+     }
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.recomb_k_per_A",
+     "sigma": null,
+     "source": "fluxor recombination at 1 uA, linear in current, capped at 0.5 (calc/estation_lane._generate)",
+     "tag": "DERIVED",
+     "unit": "1/A (low, central, high aspect)",
+     "value": [
+      1066.5144302551605,
+      3555.048100850536,
+      35550.481008505354
+     ]
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "lane.noise_threshold",
+     "sigma": null,
+     "source": "3 sigma of the two-channel current from the TetrAMM chain, rounded up to 0.1 nA (not in the live bounds)",
+     "tag": "DERIVED",
+     "unit": "nA",
+     "value": 4.3
+    }
+   ],
+   "quad_total": 0.045868354570822126,
+   "slots": {
+    "bounds": "userTran10",
+    "flags": "userTran11",
+    "flux": "userTran9",
+    "status": "userCalcOut9"
+   },
+   "terms": [
+    {
+     "name": "mu_en/rho tables",
+     "rel": 0.03,
+     "source": "terms.mu_en_tables_rel: spread of NIST vs Chantler/Elam",
+     "tag": "CHOICE"
+    },
+    {
+     "name": "W",
+     "rel": 0.006,
+     "source": "terms.w_rel: spread of the W sources, carried as 1 sigma",
+     "tag": "CHOICE"
+    },
+    {
+     "name": "density",
+     "rel": 0.002,
+     "source": "terms.density_rel",
+     "tag": "CHOICE"
+    },
+    {
+     "name": "gas stand-in P,T",
+     "rel": 0.012161659057655705,
+     "source": "gas.p_kpa sigma 1.0 kPa and gas.t_c sigma 2.0 C (stand-ins: no E-station P or T sensor)",
+     "tag": "ASSUMED"
+    },
+    {
+     "name": "collection length",
+     "rel": 0.03,
+     "source": "ic500.l_eff_cm sigma (relative 3 %: fringe-field allowance)",
+     "tag": "GIVEN"
+    },
+    {
+     "name": "TetrAMM range gain",
+     "rel": 0.01,
+     "source": "tetramm.gain_rel (placeholder)",
+     "tag": "ASSUMED"
+    },
+    {
+     "name": "energy readback",
+     "rel": 0.004,
+     "source": "terms.energy_readback_rel (assumed 0.1 % dE/E times the largest dlnF/dlnE)",
+     "tag": "ASSUMED"
+    }
+   ],
+   "wall_fit": [
+    17.7,
+    25.9,
+    1.36
+   ]
+  },
+  "monc": {
+   "asymmetric": {
+    "recombination": null,
+    "wall_loss": "userTran6.C"
+   },
+   "chamber": "CMC chamber (SR570 + V2F + scaler)",
+   "expected_clc": {
+    "userTran4": {
+     "CLCI": "(1+(C%3)^2)*10^(FLOOR(C/3)+3*D-12)",
+     "CLCJ": "B>0?MAX(A/B-H,0):0",
+     "CLCK": "G*3.369272E-3/(F+273.15)",
+     "CLCL": "LN(E)",
+     "CLCM": "EXP(7.469-L*(1.833+L*(.5342-L*.06941)))",
+     "CLCN": "EXP(6.046+L*(.4546-L*(1.762-L*.2949)))",
+     "CLCO": "1-EXP(-6.19*M*K)",
+     "CLCP": "J*I*2.17205E12/E/O*EXP(-6.19*N*K)"
+    },
+    "userTran5": {
+     "CLCE": "B>0?A/B:-1",
+     "CLCH": "E>=0&&E<F?H+1:0",
+     "CLCJ": "C+10*D",
+     "CLCK": "H>G?(J#M?1:MIN(K+1,I)):K",
+     "CLCL": "H>G?(K<2?E:L+(E-L)/K):L",
+     "CLCM": "H>G?J:M",
+     "CLCN": "M#J",
+     "CLCO": "H>G?0:O+1",
+     "CLCP": "(1+(C%3)^2)*10^(FLOOR(C/3)+3*D-17)*L"
+    },
+    "userTran6": {
+     "CLCB": "B*(1.1221E-3/I)^.568",
+     "CLCC": "B>18.1?1-1/EXP(((B-18.1)/27)^1.41):0",
+     "CLCD": "A*.964/(1-MAX(.9*C-.07,0))",
+     "CLCE": "A*1.036/(1-C-MIN(.09,2*C+.05*(B>13)))",
+     "CLCF": "A>0?100*(E*(1-C)/A-1):0",
+     "CLCG": "A>0?100*(1-D*(1-C)/A):0",
+     "CLCL": "A/(1-C)"
+    },
+    "userTran8": {
+     "CLCF": "A>12.5",
+     "CLCG": "C>0",
+     "CLCH": "D>7200",
+     "CLCI": "E>P",
+     "CLCJ": "A<4.9||A>30.5",
+     "CLCK": "B<=0",
+     "CLCL": "F+2*G+4*H+8*I+16*J+32*K"
+    }
+   },
+   "flags": [
+    {
+     "bit": 1,
+     "letter": "F",
+     "text": "E>12.5 keV, wall-loss band in use"
+    },
+    {
+     "bit": 2,
+     "letter": "G",
+     "text": "background stale (other gain/none)"
+    },
+    {
+     "bit": 4,
+     "letter": "H",
+     "text": "pressure not updated for 2 h"
+    },
+    {
+     "bit": 8,
+     "letter": "I",
+     "text": "no beam (bounds not meaningful)"
+    },
+    {
+     "bit": 16,
+     "letter": "J",
+     "text": "E outside 4.9-30.5 keV (MAJOR)"
+    },
+    {
+     "bit": 32,
+     "letter": "K",
+     "text": "scaler not counting (MAJOR)"
+    }
+   ],
+   "high_factor": 1.036,
+   "low_factor": 0.964,
+   "name": "MonC",
+   "not_in_budget": [
+    "recombination (not applicable to the CMC chamber lane)"
+   ],
+   "params": [
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "W",
+     "sigma": null,
+     "source": "physics_note.md 2.1: one of five sources; the spread is the W term (0.6 %)",
+     "tag": "CHOICE",
+     "unit": "eV",
+     "value": 34.8
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "collection length",
+     "sigma": null,
+     "source": "analysis/collection_length_cmc.py, nominal case of the guarded CMC chamber, rounded (checked against the model CSV)",
+     "tag": "MEASURED",
+     "unit": "cm",
+     "value": 6.19
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "wall-loss fit E0, s, p",
+     "sigma": null,
+     "source": "fit of f_pe x the Monte Carlo of this chamber as mounted (analysis/wall_loss_families.py, wall_loss_fit.py)",
+     "tag": "DERIVED",
+     "unit": "keV, keV, 1",
+     "value": [
+      18.1,
+      27.0,
+      1.41
+     ]
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "plate orientation",
+     "sigma": null,
+     "source": "user 2026-11-13 (calc/lanes.py): horizontal plates, E along them",
+     "tag": "GIVEN",
+     "unit": "",
+     "value": "horizontal"
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "wall-loss band",
+     "sigma": null,
+     "source": "covers every MC variant and two combined corners within 2 MC standard errors (finding M4, 2026-11-13)",
+     "tag": "DERIVED",
+     "unit": "a,b,cap,k,floor,e_widen",
+     "value": {
+      "a": 0.9,
+      "b": 0.07,
+      "cap": 0.09,
+      "e_widen": 13,
+      "floor": 0.05,
+      "k": 2
+     }
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "reference density rho0",
+     "sigma": null,
+     "source": "density of the wall-loss Monte Carlo (CLCB)",
+     "tag": "GIVEN",
+     "unit": "g/cm3",
+     "value": 0.0011221
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "range exponent",
+     "sigma": null,
+     "source": "1/1.76: CSDA range ~ T^1.76/rho (CLCB)",
+     "tag": "DERIVED",
+     "unit": "1",
+     "value": 0.568
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "cross-section fit mu_en/rho",
+     "sigma": null,
+     "source": "calc/fit_coefficients.py: minimax cubic over 5-30 keV of a NIST-anchored target, 4 significant figures, max error 0.6 %",
+     "tag": "DERIVED",
+     "unit": "calc expression, L = ln E",
+     "value": "EXP(7.469-L*(1.833+L*(.5342-L*.06941)))"
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "cross-section fit mu/rho",
+     "sigma": null,
+     "source": "calc/fit_coefficients.py, as above",
+     "tag": "DERIVED",
+     "unit": "calc expression, L = ln E",
+     "value": "EXP(6.046+L*(.4546-L*(1.762-L*.2949)))"
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "V2F scale",
+     "sigma": null,
+     "source": "calc/monp_transform.K_FLUX divisor (ELECTRONICS_CONCLUSIONS.md)",
+     "tag": "GIVEN",
+     "unit": "Hz/V",
+     "value": 100000.0
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "flux constant",
+     "sigma": null,
+     "source": "W/(e*1e3) = 2.17205e17 (CLCP uses 2.17205E12 with the 1e5 Hz/V V2F scale)",
+     "tag": "DERIVED",
+     "unit": "photons/s per A per keV x ...",
+     "value": 2.1720451579123453e+17
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "flag 1 energy",
+     "sigma": null,
+     "source": "quality_slots.FLAG1_E_KEV (informational)",
+     "tag": "DERIVED",
+     "unit": "keV",
+     "value": 12.5
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "flag 4 pressure age",
+     "sigma": null,
+     "source": "pressure not updated for 2 h",
+     "tag": "CHOICE",
+     "unit": "s",
+     "value": 7200
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "flag 16 energy range",
+     "sigma": null,
+     "source": "validity range of the fit and tables (alarm)",
+     "tag": "GIVEN",
+     "unit": "keV",
+     "value": [
+      4.9,
+      30.5
+     ]
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "background threshold",
+     "sigma": null,
+     "source": "no beam while the raw rate stays below this (user dark/light split)",
+     "tag": "CHOICE",
+     "unit": "Hz",
+     "value": 400.0
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "background settle",
+     "sigma": null,
+     "source": "no-beam run length before the estimate updates",
+     "tag": "CHOICE",
+     "unit": "s",
+     "value": 10.0
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "background averaging",
+     "sigma": null,
+     "source": "plain mean for the first 60 samples, then exponential",
+     "tag": "CHOICE",
+     "unit": "samples",
+     "value": 60.0
+    }
+   ],
+   "quad_total": 0.03580502757993631,
+   "slots": {
+    "bkg": "userTran5",
+    "bounds": "userTran6",
+    "dark": "userCalcOut5",
+    "flags": "userTran8",
+    "flux": "userTran4",
+    "status": "userCalcOut4"
+   },
+   "terms": [
+    {
+     "name": "mu_en/rho tables",
+     "rel": 0.03,
+     "source": "spread of NIST vs Chantler/Elam",
+     "tag": "CHOICE"
+    },
+    {
+     "name": "W",
+     "rel": 0.006,
+     "source": "full spread of five sources, carried as 1 sigma",
+     "tag": "CHOICE"
+    },
+    {
+     "name": "electronics",
+     "rel": 0.007,
+     "source": "SR570 gain x V2F scale incl. loading, type B (ELECTRONICS_CONCLUSIONS.md; user 2026-11-13)",
+     "tag": "DERIVED"
+    },
+    {
+     "name": "density (live P, T)",
+     "rel": 0.002,
+     "source": "live pressure and temperature",
+     "tag": "DERIVED"
+    },
+    {
+     "name": "cross-section fit",
+     "rel": 0.009,
+     "source": "calc fit vs log-log NIST, worst at 25 keV",
+     "tag": "DERIVED"
+    },
+    {
+     "name": "collection length (guarded)",
+     "rel": 0.014,
+     "source": "spread of analysis/collection_length_cmc.py over the dimension tolerances plus 0.5 % for the 2-D model",
+     "tag": "DERIVED"
+    },
+    {
+     "name": "energy readback",
+     "rel": 0.004,
+     "source": "assumed 0.1 % energy error times the largest dlnF/dlnE (3.7), no edge scan yet (user 2026-11-17)",
+     "tag": "ASSUMED"
+    }
+   ],
+   "wall_fit": [
+    18.1,
+    27.0,
+    1.41
+   ]
+  },
+  "monp": {
+   "asymmetric": {
+    "recombination": null,
+    "wall_loss": "userTran3.C"
+   },
+   "chamber": "CMC chamber (SR570 + V2F + scaler)",
+   "expected_clc": {
+    "userTran1": {
+     "CLCI": "(1+(C%3)^2)*10^(FLOOR(C/3)+3*D-12)",
+     "CLCJ": "B>0?MAX(A/B-H,0):0",
+     "CLCK": "G*3.369272E-3/(F+273.15)",
+     "CLCL": "LN(E)",
+     "CLCM": "EXP(7.469-L*(1.833+L*(.5342-L*.06941)))",
+     "CLCN": "EXP(6.046+L*(.4546-L*(1.762-L*.2949)))",
+     "CLCO": "1-EXP(-6.19*M*K)",
+     "CLCP": "J*I*2.17205E12/E/O*EXP(-6.19*N*K)"
+    },
+    "userTran2": {
+     "CLCE": "B>0?A/B:-1",
+     "CLCH": "E>=0&&E<F?H+1:0",
+     "CLCJ": "C+10*D",
+     "CLCK": "H>G?(J#M?1:MIN(K+1,I)):K",
+     "CLCL": "H>G?(K<2?E:L+(E-L)/K):L",
+     "CLCM": "H>G?J:M",
+     "CLCN": "M#J",
+     "CLCO": "H>G?0:O+1",
+     "CLCP": "(1+(C%3)^2)*10^(FLOOR(C/3)+3*D-17)*L"
+    },
+    "userTran3": {
+     "CLCB": "B*(1.1221E-3/I)^.568",
+     "CLCC": "B>17.9?1-1/EXP(((B-17.9)/19.7)^1.17):0",
+     "CLCD": "A*.964/(1-MAX(.9*C-.07,0))",
+     "CLCE": "A*1.036/(1-C-MIN(.09,2*C+.05*(B>13)))",
+     "CLCF": "A>0?100*(E*(1-C)/A-1):0",
+     "CLCG": "A>0?100*(1-D*(1-C)/A):0",
+     "CLCH": "H+1",
+     "CLCL": "A/(1-C)"
+    },
+    "userTran7": {
+     "CLCF": "A>12.5",
+     "CLCG": "C>0",
+     "CLCH": "D>7200",
+     "CLCI": "E>P",
+     "CLCJ": "A<4.9||A>30.5",
+     "CLCK": "B<=0",
+     "CLCL": "F+2*G+4*H+8*I+16*J+32*K"
+    }
+   },
+   "flags": [
+    {
+     "bit": 1,
+     "letter": "F",
+     "text": "E>12.5 keV, wall-loss band in use"
+    },
+    {
+     "bit": 2,
+     "letter": "G",
+     "text": "background stale (other gain/none)"
+    },
+    {
+     "bit": 4,
+     "letter": "H",
+     "text": "pressure not updated for 2 h"
+    },
+    {
+     "bit": 8,
+     "letter": "I",
+     "text": "no beam (bounds not meaningful)"
+    },
+    {
+     "bit": 16,
+     "letter": "J",
+     "text": "E outside 4.9-30.5 keV (MAJOR)"
+    },
+    {
+     "bit": 32,
+     "letter": "K",
+     "text": "scaler not counting (MAJOR)"
+    }
+   ],
+   "high_factor": 1.036,
+   "low_factor": 0.964,
+   "name": "MonP",
+   "not_in_budget": [
+    "recombination (not applicable to the CMC chamber lane)"
+   ],
+   "params": [
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "W",
+     "sigma": null,
+     "source": "physics_note.md 2.1: one of five sources; the spread is the W term (0.6 %)",
+     "tag": "CHOICE",
+     "unit": "eV",
+     "value": 34.8
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "collection length",
+     "sigma": null,
+     "source": "analysis/collection_length_cmc.py, nominal case of the guarded CMC chamber, rounded (checked against the model CSV)",
+     "tag": "MEASURED",
+     "unit": "cm",
+     "value": 6.19
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "wall-loss fit E0, s, p",
+     "sigma": null,
+     "source": "fit of f_pe x the Monte Carlo of this chamber as mounted (analysis/wall_loss_families.py, wall_loss_fit.py)",
+     "tag": "DERIVED",
+     "unit": "keV, keV, 1",
+     "value": [
+      17.9,
+      19.7,
+      1.17
+     ]
+    },
+    {
+     "closes_with": "a check of the beam centring on the chamber",
+     "date": "",
+     "name": "plate orientation",
+     "sigma": null,
+     "source": "user 2026-11-13 (calc/lanes.py); MonP: vertical plates, E toward the plates, beam centred ASSUMED (quality_slots comment)",
+     "tag": "ASSUMED",
+     "unit": "",
+     "value": "vertical"
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "wall-loss band",
+     "sigma": null,
+     "source": "covers every MC variant and two combined corners within 2 MC standard errors (finding M4, 2026-11-13)",
+     "tag": "DERIVED",
+     "unit": "a,b,cap,k,floor,e_widen",
+     "value": {
+      "a": 0.9,
+      "b": 0.07,
+      "cap": 0.09,
+      "e_widen": 13,
+      "floor": 0.05,
+      "k": 2
+     }
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "reference density rho0",
+     "sigma": null,
+     "source": "density of the wall-loss Monte Carlo (CLCB)",
+     "tag": "GIVEN",
+     "unit": "g/cm3",
+     "value": 0.0011221
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "range exponent",
+     "sigma": null,
+     "source": "1/1.76: CSDA range ~ T^1.76/rho (CLCB)",
+     "tag": "DERIVED",
+     "unit": "1",
+     "value": 0.568
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "cross-section fit mu_en/rho",
+     "sigma": null,
+     "source": "calc/fit_coefficients.py: minimax cubic over 5-30 keV of a NIST-anchored target, 4 significant figures, max error 0.6 %",
+     "tag": "DERIVED",
+     "unit": "calc expression, L = ln E",
+     "value": "EXP(7.469-L*(1.833+L*(.5342-L*.06941)))"
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "cross-section fit mu/rho",
+     "sigma": null,
+     "source": "calc/fit_coefficients.py, as above",
+     "tag": "DERIVED",
+     "unit": "calc expression, L = ln E",
+     "value": "EXP(6.046+L*(.4546-L*(1.762-L*.2949)))"
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "V2F scale",
+     "sigma": null,
+     "source": "calc/monp_transform.K_FLUX divisor (ELECTRONICS_CONCLUSIONS.md)",
+     "tag": "GIVEN",
+     "unit": "Hz/V",
+     "value": 100000.0
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "flux constant",
+     "sigma": null,
+     "source": "W/(e*1e3) = 2.17205e17 (CLCP uses 2.17205E12 with the 1e5 Hz/V V2F scale)",
+     "tag": "DERIVED",
+     "unit": "photons/s per A per keV x ...",
+     "value": 2.1720451579123453e+17
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "flag 1 energy",
+     "sigma": null,
+     "source": "quality_slots.FLAG1_E_KEV (informational)",
+     "tag": "DERIVED",
+     "unit": "keV",
+     "value": 12.5
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "flag 4 pressure age",
+     "sigma": null,
+     "source": "pressure not updated for 2 h",
+     "tag": "CHOICE",
+     "unit": "s",
+     "value": 7200
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "flag 16 energy range",
+     "sigma": null,
+     "source": "validity range of the fit and tables (alarm)",
+     "tag": "GIVEN",
+     "unit": "keV",
+     "value": [
+      4.9,
+      30.5
+     ]
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "background threshold",
+     "sigma": null,
+     "source": "no beam while the raw rate stays below this (user dark/light split)",
+     "tag": "CHOICE",
+     "unit": "Hz",
+     "value": 400.0
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "background settle",
+     "sigma": null,
+     "source": "no-beam run length before the estimate updates",
+     "tag": "CHOICE",
+     "unit": "s",
+     "value": 10.0
+    },
+    {
+     "closes_with": "",
+     "date": "",
+     "name": "background averaging",
+     "sigma": null,
+     "source": "plain mean for the first 60 samples, then exponential",
+     "tag": "CHOICE",
+     "unit": "samples",
+     "value": 60.0
+    }
+   ],
+   "quad_total": 0.03580502757993631,
+   "slots": {
+    "bkg": "userTran2",
+    "bounds": "userTran3",
+    "dark": "userCalcOut2",
+    "flags": "userTran7",
+    "flux": "userTran1",
+    "status": "userCalcOut1"
+   },
+   "terms": [
+    {
+     "name": "mu_en/rho tables",
+     "rel": 0.03,
+     "source": "spread of NIST vs Chantler/Elam",
+     "tag": "CHOICE"
+    },
+    {
+     "name": "W",
+     "rel": 0.006,
+     "source": "full spread of five sources, carried as 1 sigma",
+     "tag": "CHOICE"
+    },
+    {
+     "name": "electronics",
+     "rel": 0.007,
+     "source": "SR570 gain x V2F scale incl. loading, type B (ELECTRONICS_CONCLUSIONS.md; user 2026-11-13)",
+     "tag": "DERIVED"
+    },
+    {
+     "name": "density (live P, T)",
+     "rel": 0.002,
+     "source": "live pressure and temperature",
+     "tag": "DERIVED"
+    },
+    {
+     "name": "cross-section fit",
+     "rel": 0.009,
+     "source": "calc fit vs log-log NIST, worst at 25 keV",
+     "tag": "DERIVED"
+    },
+    {
+     "name": "collection length (guarded)",
+     "rel": 0.014,
+     "source": "spread of analysis/collection_length_cmc.py over the dimension tolerances plus 0.5 % for the 2-D model",
+     "tag": "DERIVED"
+    },
+    {
+     "name": "energy readback",
+     "rel": 0.004,
+     "source": "assumed 0.1 % energy error times the largest dlnF/dlnE (3.7), no edge scan yet (user 2026-11-17)",
+     "tag": "ASSUMED"
+    }
+   ],
+   "wall_fit": [
+    17.9,
+    19.7,
+    1.17
+   ]
+  }
+ },
+ "prefix": "15IDC:util:",
+ "xray_fluxor_commit": "130a90b"
+}

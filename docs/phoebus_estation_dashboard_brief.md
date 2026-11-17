@@ -80,3 +80,7 @@ Top row: three cards (name, beam and mono, RESULT with unit and bounds, state ch
 
 ## Definition of done
 Screens build with the generator; `check_screens.py --static` gives 0 failures; `--live` currency check passes against the real IOC (read-only); every PV in the maps is read-only on the screen; screenshots of the live state and of the simulated states (normal beam, no beam, low current, NO DATA, ALARM bit 16 and bit 32, each WARNING, bit 1 only, MonC detached) from a loopback soft IOC with the same PV names (the `cmc-epics-ioc` and `phoebus` skills); no private PV names or IPs in tracked files; the repos' docs updated in the same commits (README and HANDOFF tables in 15IDC HA; `docs/` in xray_fluxor); progress logged (append-only `PROGRESS.md`); the exact ship command handed to the user.
+
+
+## Status 2026-11-17 (implementer): version 1 built
+Built in `15IDC HA` (commits 438927e to 386a26e) and `tools/export_dashboard_model.py` here. Not shipped (the user's step). Trends not built, as descoped. See `calc/HANDOFF.md`, "Flux dashboard", and `PROGRESS.md`.

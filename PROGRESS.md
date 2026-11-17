@@ -1977,3 +1977,81 @@ Evidence:  - review script (scratchpad) → the numbers above; noise by rate ban
 Deviations from the plan: none.
 Open questions / blockers: whether to publish the creator fix, on top of ecaa8ec or with another history replacement (the user).
 Next: none.
+
+## 2026-11-17 — Architect: public history replaced again (docx creator name)
+Status: done
+Done:      - GitHub main replaced by one root commit 0a5f6f1: the tree of local 039e4e3, with the PROGRESS.md cron line redacted as before. Force-pushed with lease over ecaa8ec (user: "Replace history again").
+Evidence:  - gates, all in one script before the push: the tree differs from HEAD only in PROGRESS.md; author and committer are the noreply identity; the old dc:creator value (full name or surname, raw, UTF-16 or inside a zip member) is in 0 files of the new tree, and in 2 of ecaa8ec (the positive control); `scan_tree.py 0a5f6f1` → 294 files, 0 with a private name, exit 0
+           - GitHub after the push: 1 commit (0a5f6f1), 1 branch, 0 tags; both .docx fetched from GitHub → dc:creator and cp:lastModifiedBy empty
+Deviations from the plan: none.
+Open questions / blockers: GitHub still serves ecaa8ec (and the three before it) by SHA until it garbage-collects them; GitHub Support can purge cached views (the user's call). scan_tree.py's name list doesn't hold this name, so only this push's own check covered it.
+Next: none.
+
+## 2026-11-17 — MonC figures: the method before this repo against this repo, point to point (unc10_legacy)
+Status: ready for review. The user asked: "add to your recent figures our current methodology (before this repo), where we didn't subtract the dark, we didn't account for pressure changes: what is the point-to-point uncertainty? And how does it improve with this repo?"
+
+Done:
+- `analysis/figures/fig_unc10.py`:
+  - new `unc10_legacy.png`: the point-to-point error of the ratio of two MonC readings at one energy,
+    1 s to 3 days apart, at 200 and 10 kHz, old method against this repo; and the error when the flux or the
+    gain changes between the points.
+  - The summary header points to it.
+  - Built on main's review fixes (039e4e3).
+- `analysis/figures/README.md`: a row for the new figure.
+
+Evidence (`make_figures.py --only unc10`):
+- **Electronics.** The rms change of one 1 s count at the interim setting over 4.0 days (13 Nov 12:28 – 17 Nov,
+  chamber detached) is 0.73 Hz at 1 s, 1.1 Hz at 1 min, 1.5 Hz at 1 h and 2.0 Hz at 1 day. At 200 kHz that is
+  0.0004–0.001 %, the same for both methods.
+- **Within an hour the two methods are the same:** 0.0006 % at 200 kHz and 0.011 % at 10 kHz, 1 min apart.
+  - The weather (≤ 0.036 %, the 1-h median) is not resolved by hourly records, and neither method corrects it:
+    the live pressure is an hourly airport report.
+- **1 day apart:** the old method 0.40 % (pressure ⊕ hutch temperature, median) against this repo 0.03–0.08 %.
+  - The repo band runs from the report resolution and age (0.033 %) up to √2 × the 0.050 % station transfer
+    with the age (0.076 %). It is untested.
+  - This repo pays off for points more than ~3–6 h apart.
+- **Flux or gain changes between the points**, at 200 kHz:
+  - a 10 % flux change with the dark left in: 0.003 % (0.06 % at 10 kHz);
+  - a gain change: old 0.08–0.57 % (worst 5 ↔ 20 µA/V) against 0.016–0.05 % with the measured factors. That
+    slot is a DRAFT and not installed.
+- renders inspected: no overflow or collisions; curves broken at 1 h, where the weather term starts
+
+Deviations from the plan: none (read-only)
+
+Open questions / blockers:
+- Below 1 h the weather can't be quantified from hourly reports. A barometer with readings every minute would
+  pin it.
+- The gain-change improvement needs `calc/monc_gain_cal.py` to be installed (the user's step).
+
+Next: the user's review
+
+## 2026-11-17 — Flux dashboard version 1 (Phoebus, three lanes)
+Status: ready for audit
+Done:
+- `tools/export_dashboard_model.py` and `docs/dashboard_model.json` (commit: this one): parameters with tags and sources, budget terms, flag legend, slot map, expected `.CLC*` strings for the E-station, MonP and MonC.
+- In 15IDC HA (commits 438927e, 9270c34, 190c33b, 63ea88e, 386a26e): `ioc/utilioc/tools/gen_dashboard.py` → `screens/flux_dashboard.bob` (three cards; tabs Inputs, Corrections, Flags, Uncertainty budget, Model parameters with live `.CLC*`); `tests/check_dashboard.py` (`--static`, `--live`); `tests/dashboard_sim.py` (loopback simulator); screenshots in `screens/img/`; a Flux dashboard button in utilioc's header; README, HANDOFF, OPERATOR there and `calc/OPERATOR.md`, `calc/HANDOFF.md` here.
+Evidence:
+- `check_dashboard.py --static --live` (read-only, CA gets) → `PASS` ×all, `currency: 91 of 91 live .CLC strings equal the export`, `PASS (0 failures)`. The first live run found 91 of 92: MonC `userTran6.CLCH` is a link, not an expression; the export was fixed, not the IOC.
+- Export totals reproduce the brief: E-station 4.59 % (0.954 / 1.046), MonP and MonC 3.58 % (0.964 / 1.036).
+- Screenshots: live 2026-11-17 and simulated normal, no beam / low current, NO DATA, ALARM bit 16 and bit 32, WARNING (bits 2 and 4 on each lane), bit 1 only (no chip, lamp on the Flags tab), IOC down, in 15IDC HA `ioc/utilioc/screens/img/flux_dashboard_*.png`.
+- No write to any PV of the IOC; the only write actions are to the local `loc://flux_sel` (checked by `--static`).
+Deviations from the plan:
+- The brief names `check_screens.py`; that file is the root-screen checker (`15IDC HA/screens/`), which does not open the dashboard. The checks are in `tests/check_dashboard.py` instead. User approval: not asked (name only).
+- The spec's "MonC shown like the others, no hand-edited DETACHED banner" won over the brief's detached wording: a first cut had a banner, it was removed before commit 63ea88e.
+- The details panel for the selected chamber is a local-selection button per card, not a click on the card itself.
+- `tests/screen_pvs.py` (every PV is an IOC record) was not run: it needs the IOC's record list, which is only made on the host.
+Open questions / blockers:
+- Not shipped: the user ships (also carries the E-station Slots-tab commit b609297).
+- The E-station card carries a standing note that a frozen TetrAMM is not detected (spec open item 0); no detector built.
+- Trends not built (descoped). C-station parameter tags are assigned by hand in the export: please review them.
+Next: the user's review; the ship; the E-station beam-on check.
+
+## 2026-11-17 (later) — Flux dashboard: changes requested by the user
+Status: ready for audit
+Done:
+- 15IDC HA (commit below): card rows top to bottom high, up %, RESULT (44 pt), down %, low; SR570 sensitivity shown in µA/V (read-only formula PV, record unchanged); Trends tab restored with live-only strip charts (this chamber: RESULT with low/high, net current or rate, energy; all three RESULTs on a log axis; 10 min, 1 h, 24 h). No archiver.
+Evidence:
+- `check_dashboard.py --static --live` → `currency: 91 of 91 live .CLC strings equal the export`, `PASS (0 failures)`; screenshots refreshed in 15IDC HA `screens/img/` (live, live trends, simulated states, IOC down).
+Deviations from the plan: Trends were descoped on 2026-11-17 and are back at the user's word ("Add the trend tabs back, just don't rely on the archiver"). Ranges are 10 min, 1 h, 24 h, not 1 h, 24 h, 7 d: live history cannot reach back before the display opened.
+Open questions / blockers: 36 strip charts run at once; watch Phoebus load on the user's PC. Not shipped.
+Next: the user's review.
