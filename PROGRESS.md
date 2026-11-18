@@ -2069,3 +2069,23 @@ Evidence:  - generated `op/bob/flux_dashboard.bob` vs 15IDC HA's → one line di
 Deviations from the plan: none (the plan-change row above).
 Open questions / blockers: the E-station lane's source PV names stay unpublished (gitignored `calc/estation_pvs.local.json`); an agent elsewhere takes them from the running IOC or the user.
 Next: vendor into 15IDC HA from a clone of the public repo.
+
+## 2026-11-17 — Dashboard vendored into 15IDC HA from the public repo
+Status: done
+Done:      - Published 1d2323b (op/) and 43dd5ea (the Model parameters note names `op/tests/check_dashboard.py`, local ea257a2). 15IDC HA commit bcb2753 removes its generator, checks, simulator, model copy and screenshots and vendors the `.bob` with `ioc/utilioc/tools/vendor_dashboard.py` from a fresh clone of the public repo.
+Evidence:  - fresh clone at 43dd5ea: `op/tests/check_dashboard.py --static` → PASS; unittest → Ran 166 tests, OK
+           - 15IDC HA: `vendor_dashboard.py <clone> screens --check` → up to date (xray_fluxor 43dd5ea); `check_screens.py --static` → 0 failure(s)
+Deviations from the plan: none.
+Open questions / blockers: shipping the vendored screen to the host is the user's step.
+Next: none.
+
+## 2026-11-18 — README (inventory) and RUNBOOK (procedures), with the rationale
+Status: done
+Done:      - New `README.md`: what the repository does, where to start, the inventory (tracked here; kept out on purpose, and why; in the site repository; running at the beamline, with the slot map), and why the dashboard lives here (user: "update the docs with this inventory and procedures, along with the rationale"). The repository had no README, so the public page had no landing text.
+           - New `RUNBOOK.md`: §1 checkout, §2 install/check a lane, §3 the change chain from a constant to the IOC and the host's screen, §4 publishing (squash, gates, document metadata, leaks), §5 vendoring into the site repository, §6 recovery, open items (the local history exists on one PC only).
+           - Links: `op/README.md` and `calc/HANDOFF.md` point to the RUNBOOK; in 15IDC HA, a README row and two RUNBOOK recovery rows point to the public repository.
+Evidence:  - RUNBOOK commands checked against the code: `install_lane.py` options (--compare, --dry-run, --reset-values, --remove; lanes MonP, MonC, EStn), the skipped test (`tests/test_estation_lane.py`, "no local PV config"), `vendor_dashboard.py` usage
+           - no private value written: the publishing substitution and the names list are described, not quoted
+Deviations from the plan: none.
+Open questions / blockers: a private backup remote for this checkout's history is the user's call.
+Next: none.

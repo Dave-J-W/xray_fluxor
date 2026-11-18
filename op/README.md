@@ -42,6 +42,7 @@ stop changing with no alarm; a freeze detector is proposed in `TODO.md`, not bui
    `EPICS_CA_AUTO_ADDR_LIST=NO`) must report every `.CLC*` string equal to the export.
 
 ## For an agent working in 15IDC HA
+The full procedures are in `RUNBOOK.md` (§2 lanes, §3 the change chain, §5 vendoring); this is the short form.
 Everything the site repository needs is in the public repository https://github.com/Dave-J-W/xray_fluxor:
 ```bash
 git clone https://github.com/Dave-J-W/xray_fluxor.git      # or: git -C xray_fluxor pull
