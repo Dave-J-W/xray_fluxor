@@ -2089,3 +2089,14 @@ Evidence:  - RUNBOOK commands checked against the code: `install_lane.py` option
 Deviations from the plan: none.
 Open questions / blockers: a private backup remote for this checkout's history is the user's call.
 Next: none.
+
+## 2026-11-18 — Handoff: monitor counts or current to photons/s
+Status: done
+Done:      - New `docs/handoff_counts_to_photons.md` (user: "I need a handoff for another agent to convert the monitor current and counts into photons/second"): four routes (archived live result; MonP/MonC recomputed with the live calc's Python mirrors; E-station with fluxor; per-Hz table and formula), inputs and PVs per lane, status bits, traps, uncertainty, setup checks. Linked from README.md.
+Evidence:  - `monp_transform.evaluate` + `quality_slots.bounds` → MonP 10 keV 9.776e11 [9.424e11, 1.0128e12]; MonP 30 keV 6.320e12 [5.077e12, 7.784e12]; MonC 30 keV 4.916e12 [4.182e12, 5.811e12] (= METHOD.md §9)
+           - `fluxor.core.evaluate` (IC-500-50, 4 uA, 10 keV, 98.99 kPa, 22.2 C) → 4.351e12 [4.117e12, 5.221e12], sigma 4.42 %; fluxor MonP 10 keV 9.755e11 (0.2 % below the live fit)
+           - `calc/monp_transform.py` → PASS; `fluxor/example.py` runs
+           - no E-station PV name in the handoff (grep)
+Deviations from the plan: none.
+Open questions / blockers: none.
+Next: publish on the user's go.

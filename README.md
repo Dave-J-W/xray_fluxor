@@ -15,6 +15,7 @@ recovering are in [RUNBOOK.md](RUNBOOK.md).
 ## Where to start
 | You want | Read |
 |---|---|
+| **Convert monitor counts or current to photons/s yourself (an agent's handoff)** | [docs/handoff_counts_to_photons.md](docs/handoff_counts_to_photons.md) |
 | The number and how far to trust it | [RESULT.md](RESULT.md), [UNCERTAINTY.md](UNCERTAINTY.md) |
 | The method, step by step, with worked examples | [METHOD.md](METHOD.md), with the evidence in [physics_note.md](physics_note.md) |
 | The chamber and electronics facts (one register, checked against code) | [CHAMBER_FACTS.md](CHAMBER_FACTS.md) (`analysis/check_chamber_facts.py`) |
